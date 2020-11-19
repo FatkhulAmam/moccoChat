@@ -8,6 +8,7 @@ const Stack = createStackNavigator();
 //import screens
 import Register from '../screens/Register'
 import Verification from '../screens/Verification'
+import LandingPage from "../screens/LandingPage";
 
 
 const Route = () => {
@@ -28,6 +29,7 @@ const Route = () => {
                             }
                         }} />
                         <Stack.Screen name="Verification" component={Verification} options={{ headerShown: false }} />
+                        <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
         )

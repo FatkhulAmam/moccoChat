@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, TextInput } from 'react-native'
-import { Container, Button, Text, Form, Header } from 'native-base';
+import { Container, Button, Text, Form, Header, Left, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,8 +10,9 @@ const Register = () => {
         <>
             <Header style={styles.header} transparent>
                 <Button transparent onPress={() => navigation.goBack()}>
-                    <Icon name='arrow-left' size={22} />
+                    <Icon name='arrow-left' size={22} color="#ffffff"/>
                 </Button>
+                <Right/>
             </Header>
             <Container style={styles.parrent}>
                 <Text style={styles.enterTxt}>Enter Code</Text>
@@ -26,7 +27,7 @@ const Register = () => {
                 </Form>
             </Container>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={() => navigation.navigate('Verification')}>
+                <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
                     <Icon name='arrow-right' size={30} color='#ffffff' />
                 </Button>
             </View>
@@ -37,6 +38,9 @@ const Register = () => {
 export default Register
 
 const styles = StyleSheet.create({
+    header:{
+        backgroundColor: '#1c3661'
+    },
     parrent: {
         paddingRight: 15,
         flex: 1,
