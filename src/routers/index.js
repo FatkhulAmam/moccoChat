@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { NavigationContainer } from '@react-navigation/native';
+import React from 'react'
+import { NavigationContainer,useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux'
 
@@ -7,18 +7,30 @@ const Stack = createStackNavigator();
 
 //import screens
 import Register from '../screens/Register'
+import Verification from '../screens/Verification'
 
 
-class Route extends Component {
-    render() {
+const Route = () => {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
-                    <Stack.Screen name="Register" component={Register} />
+                    <Stack.Screen
+                        name="Register"
+                        component={Register}
+                        options={{
+                            title: 'Your Phone',
+                            headerStyle: {
+                                backgroundColor: '#1c3661',
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            }
+                        }} />
+                        <Stack.Screen name="Verification" component={Verification} options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
-    }
 }
 
 export default Route
