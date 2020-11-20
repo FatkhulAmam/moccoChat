@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 const Stack = createStackNavigator();
 
 //import screens
+import Intro from '../screens/Intro'
 import Register from '../screens/Register'
 import Verification from '../screens/Verification'
 import LandingPage from "../screens/LandingPage"
@@ -17,6 +18,7 @@ const Route = () => {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
+                    <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
                     <Stack.Screen
                         name="Register"
                         component={Register}

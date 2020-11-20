@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { useNavigation } from '@react-navigation/native';
 
 const ChatDetail = () => {
     return (
