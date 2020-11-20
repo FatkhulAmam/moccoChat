@@ -11,8 +11,8 @@ const MyProfile = () => {
             <StatusBar translucent backgroundColor="transparent" />
             <View>
                 <Image style={styles.avatar} source={avatar} color="#000000" />
-                <Icon style={styles.back} android="arrow-back" size={35}/>
-                <Icon style={styles.call} android="call" size={35}/>
+                <Icon style={styles.back} android="arrow-back" />
+                <Icon style={styles.call} android="call" />
                 <Text style={styles.name}>Nama Temen</Text>
                 <Text style={styles.status}>online</Text>
             </View>
@@ -31,7 +31,7 @@ const MyProfile = () => {
             </View>
             <View style={styles.btnCheck}>
                 <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
-                    <Icon name='camera' color='#ffffff' />
+                    <Icon name='chatboxes' color='#ffffff' />
                 </Button>
             </View>
         </>
@@ -47,11 +47,13 @@ const styles = StyleSheet.create({
     },
     back: {
         position: 'absolute',
+        fontSize: 40,
         left: 15,
-        top: 25
+        top: 20
     },
     call: {
         position: 'absolute',
+        fontSize: 35,
         right: 24,
         top: 25
     },

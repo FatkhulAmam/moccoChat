@@ -16,6 +16,7 @@ import LandingPage from "../screens/LandingPage"
 import ChatList from "../screens/ChatList"
 import ChatDetail from "../screens/ChatDetail"
 import MyProfile from "../screens/MyProfile"
+import ContactProfile from "../screens/ContactProfile"
 
 
 const Route = () => {
@@ -41,6 +42,7 @@ const Route = () => {
                         <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
                         <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
                         <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
+                        <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
