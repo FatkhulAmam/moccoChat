@@ -55,7 +55,7 @@ const Landing = () => {
         <>
         <StatusBar backgroundColor={'#1c3661'}/>
             <Header style={styles.header} transparent>
-                <Button transparent onPress={() => navigation.goBack()}>
+                <Button transparent onPress={() => navigation.navigate('DrawerOpen')}>
                     <Icon name='bars' size={22} color="#ffffff" />
                 </Button>
                 <Title style={styles.title}>Mocco Chat</Title>
