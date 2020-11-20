@@ -20,7 +20,7 @@ class Item extends React.Component {
     }
 }
 
-const ChatList = () => {
+const Landing = () => {
     const navigation = useNavigation()
     const [data, setData] = useState([
         {
@@ -94,7 +94,7 @@ const ChatList = () => {
     )
 }
 
-export default ChatList
+export default Landing
 
 const styles = StyleSheet.create({
     header: {
