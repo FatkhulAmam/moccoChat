@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -9,16 +9,14 @@ const slides = [
     {
         key: 'somethun',
         title: 'Quick setup, good defaults',
-        text:
-            'React-native-app-intro-slider is easy to setup with a small footprint and no dependencies. And it comes with good default layouts!',
+        text: 'React-native-app-intro-slider is easy to setup with a small footprint and no dependencies. And it comes with good default layouts!',
         icon: 'stopwatch-outline',
         colors: ['#1c3661', '#ffffff'],
     },
     {
         key: 'somethun1',
         title: 'Super-Faster Chat App',
-        text:
-            'The component is also super customizable, so you can adapt it to cover your needs and wants.',
+        text: 'The component is also super customizable, so you can adapt it to cover your needs and wants.',
         icon: 'flash-sharp',
         colors: ['#1c3661', '#ffffff'],
     },
@@ -57,7 +55,10 @@ const Intro = props => {
     )
 
     return (
+        <>
+        <StatusBar backgroundColor={'#1c3661'}/>
         <AppIntroSlider data={slides} renderItem={renderItem} bottomButton onDone={()=>navigation.navigate('Register')}/>
+        </>
     )
 }
 

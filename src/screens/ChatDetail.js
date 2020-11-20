@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput, StatusBar } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -8,6 +8,7 @@ const ChatDetail = () => {
         <>
             <TouchableOpacity>
                 <Header style={styles.header} transparent>
+                    <StatusBar backgroundColor={'#1c3661'} />
                     <Button transparent onPress={() => navigation.goBack()}>
                         <Icon name='arrow-left' size={22} color="#ffffff" />
                     </Button>
@@ -27,10 +28,10 @@ const ChatDetail = () => {
             </View>
             <Card style={styles.inputChat} transparent>
                 <Body style={styles.write}>
-                    <Icon name='smile-o' size={30} color='#8e8e8e'/>
+                    <Icon name='smile-o' size={30} color='#8e8e8e' />
                     <TextInput style={styles.textInput} placeholder="Pesan" />
-                    <Icon name='folder-open-o' size={30} color='#8e8e8e' style={{marginRight: 30}}/>
-                    <Icon name='microphone' size={30} color='#8e8e8e'/>
+                    <Icon name='folder-open-o' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
+                    <Icon name='microphone' size={30} color='#8e8e8e' />
                 </Body>
             </Card>
         </>
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     pict: {
         width: 55,
         height: 55,
-        backgroundColor: '#8e8e8e',
+        backgroundColor: '#e8e8e8',
         borderRadius: 50,
         marginLeft: 20
     },

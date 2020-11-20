@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text, Left } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
@@ -68,6 +68,7 @@ const ChatList = () => {
     return (
         <>
             <Header style={styles.header} transparent>
+            <StatusBar backgroundColor={'#1c3661'}/>
                 <Button transparent onPress={() => navigation.goBack()}>
                     <Icon name='bars' size={22} color="#ffffff" />
                 </Button>

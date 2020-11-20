@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity, TextInput } from 'react-native'
-import { Container, Button, Text, Form, Header, Left, Right } from 'native-base';
+import { StyleSheet, View, TouchableOpacity, TextInput, StatusBar } from 'react-native'
+import { Container, Button, Text, Form, Header, Title, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,9 +9,11 @@ const Register = () => {
     return (
         <>
             <Header style={styles.header} transparent>
+                <StatusBar backgroundColor={'#1c3661'}/>
                 <Button transparent onPress={() => navigation.goBack()}>
                     <Icon name='arrow-left' size={22} color="#ffffff"/>
                 </Button>
+                <Title style={styles.title}>Mocco Chat</Title>
                 <Right/>
             </Header>
             <Container style={styles.parrent}>
@@ -40,6 +42,11 @@ export default Register
 const styles = StyleSheet.create({
     header:{
         backgroundColor: '#1c3661'
+    },
+    title: {
+        fontSize: 25,
+        marginLeft: 25,
+        marginTop: 15
     },
     parrent: {
         paddingRight: 15,

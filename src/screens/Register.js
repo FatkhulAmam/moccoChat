@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, StatusBar } from 'react-native'
 import { Container, Button, Text, Form, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
@@ -8,6 +8,7 @@ const Register = () => {
     const navigation = useNavigation()
     return (
         <>
+        <StatusBar backgroundColor={'#1c3661'}/>
             <Container style={styles.parrent}>
                 <Form>
                     <Item>
@@ -25,9 +26,9 @@ const Register = () => {
                 <Text style={styles.textBottom} note>Please confirm your country code and enter your phone number </Text>
             </Container>
             <View style={styles.btnCheck}>
-                    <Button style={styles.check} onPress={()=>navigation.navigate('Verification')}>
-                        <Icon name='arrow-right' size={30} color='#ffffff' />
-                    </Button>
+                <Button style={styles.check} onPress={() => navigation.navigate('Verification')}>
+                    <Icon name='arrow-right' size={30} color='#ffffff' />
+                </Button>
             </View>
         </>
     )
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fffef2",
         paddingTop: 25
     },
-    container:{
+    container: {
         flexDirection: 'row'
     },
     code: {

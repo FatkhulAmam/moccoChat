@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
@@ -8,6 +8,7 @@ class Item extends React.Component {
     render() {
         return (
             <TouchableOpacity onPress={this.props.movePage}>
+                <StatusBar backgroundColor={'#1c3661'}/>
                 <View style={styles.renderParent}>
                     <Image style={styles.pict}/>
                     <View>
@@ -52,6 +53,7 @@ const Landing = () => {
 
     return (
         <>
+        <StatusBar backgroundColor={'#1c3661'}/>
             <Header style={styles.header} transparent>
                 <Button transparent onPress={() => navigation.goBack()}>
                     <Icon name='bars' size={22} color="#ffffff" />
@@ -140,16 +142,16 @@ const styles = StyleSheet.create({
         marginRight: 10
         
     },
+    renderParent:{
+        flexDirection: 'row',
+        margin: 5,
+        alignItems: 'center',
+    },
     btnCheck: {
         position: 'absolute',
         bottom: 25,
         right: 15,
         flexDirection: 'row'
-    },
-    renderParent:{
-        flexDirection: 'row',
-        margin: 5,
-        alignItems: 'center',
     },
     check: {
         width: 65,

@@ -2,6 +2,9 @@ import React from 'react'
 import { NavigationContainer,useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 
 const Stack = createStackNavigator();
 
@@ -12,12 +15,14 @@ import Verification from '../screens/Verification'
 import LandingPage from "../screens/LandingPage"
 import ChatList from "../screens/ChatList"
 import ChatDetail from "../screens/ChatDetail"
+import MyProfile from "../screens/MyProfile"
 
 
 const Route = () => {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
+                    <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
                     <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
                     <Stack.Screen
                         name="Register"
