@@ -3,15 +3,17 @@ import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from '
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import profile from '../assets/images/profile.png'
 
 class Item extends React.Component {
     render() {
         return (
             <TouchableOpacity onPress={this.props.movePage}>
-                <StatusBar backgroundColor={'#1c3661'}/>
-                <View style={styles.renderParent}>
-                    <Image style={styles.pict}/>
+                <StatusBar backgroundColor={'#421908'} />
+                <View style={styles.renderParent} source={this.props.avatar}>
+                    <Image style={styles.pict} />
                     <View>
                         <Text style={styles.name}>{this.props.name}</Text>
                         <Text style={styles.status}>{this.props.status}</Text>
@@ -57,11 +59,8 @@ const Landing = () => {
 
     return (
         <>
-        <StatusBar backgroundColor={'#1c3661'}/>
             <Header style={styles.header} transparent>
-                <Button transparent onPress={() => navigation.navigate('DrawerOpen')}>
-                    <Icon name='bars' size={22} color="#ffffff" />
-                </Button>
+                <Icon name='bars' size={22} color="#ffffff" onPress={() => navigation.DrawerOpen} />
                 <Title style={styles.title}>Mocco Chat</Title>
                 <Right />
                 <Button transparent onPress={() => navigation.navigate('')}>
@@ -86,7 +85,8 @@ const Landing = () => {
                         <Item
                             name={item.name}
                             status={item.status}
-                            movePage={()=> navigation.navigate("ChatList")}
+                            avatar={item.image}
+                            movePage={() => navigation.navigate("ChatList")}
                         />
                     )}
                 />
@@ -104,7 +104,7 @@ export default Landing
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#1c3661',
+        backgroundColor: '#421908',
         alignItems: 'center'
     },
     parrent: {
@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     card: {
         height: 200,
         marginTop: -5,
+        backgroundColor: '#fff5e7'
     },
     cardHeader: {
         flex: 1,
@@ -137,16 +138,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "#1c3661",
         marginTop: 10,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff5e7',
         padding: 10
     },
-    kontakData:{
-        backgroundColor: '#ffffff',
+    kontakData: {
+        backgroundColor: '#fff5e7',
         paddingLeft: 15,
         marginRight: 10
-        
+
     },
-    renderParent:{
+    renderParent: {
         flexDirection: 'row',
         margin: 5,
         alignItems: 'center',
@@ -162,21 +163,21 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 50,
         justifyContent: 'center',
-        backgroundColor: '#1c3661'
+        backgroundColor: '#421908'
     },
-    pict:{
+    pict: {
         width: 65,
         height: 65,
         backgroundColor: '#8e8e8e',
         borderRadius: 50,
     },
-    name:{
+    name: {
         fontSize: 20,
         marginLeft: 10,
         fontWeight: 'bold'
     },
-    status:{
+    status: {
         marginLeft: 10,
-        color: 'blue',
+        color: '#a7bfd0',
     }
 })

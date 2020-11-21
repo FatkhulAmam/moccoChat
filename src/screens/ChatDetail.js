@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput, StatusBar } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-ionicons'
 
 const ChatDetail = () => {
+    const navigation = useNavigation()
+
     return (
         <>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=> navigation.navigate('ContactProfile')}>
                 <Header style={styles.header} transparent>
-                    <StatusBar backgroundColor={'#1c3661'} />
+                    <StatusBar backgroundColor={'#421908'} />
                     <Button transparent onPress={() => navigation.goBack()}>
-                        <Icon name='arrow-left' size={22} color="#ffffff" />
+                        <Icon name='arrow-back' size={30} color="#ffffff" />
                     </Button>
                     <Image style={styles.pict} />
                     <View style={styles.identitiy}>
@@ -19,7 +22,7 @@ const ChatDetail = () => {
                     </View>
                     <Right />
                     <Button transparent onPress={() => navigation.navigate('')}>
-                        <Icon name='ellipsis-v' size={22} color="#ffffff" />
+                        <Icon name='more' size={35} color="#ffffff" />
                     </Button>
                 </Header>
             </TouchableOpacity>
@@ -28,10 +31,10 @@ const ChatDetail = () => {
             </View>
             <Card style={styles.inputChat} transparent>
                 <Body style={styles.write}>
-                    <Icon name='smile-o' size={30} color='#8e8e8e' />
+                    <Icon name='happy' size={30} color='#8e8e8e' />
                     <TextInput style={styles.textInput} placeholder="Pesan" />
-                    <Icon name='folder-open-o' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
-                    <Icon name='microphone' size={30} color='#8e8e8e' />
+                    <Icon name='attach' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
+                    <Icon name='mic' size={30} color='#8e8e8e' />
                 </Body>
             </Card>
         </>
@@ -42,21 +45,21 @@ export default ChatDetail
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#1c3661',
+        backgroundColor: '#421908',
         alignItems: 'center',
-        height: 100
+        height: 100,
     },
     parrent: {
         flex: 1,
-        backgroundColor: "#8e8e8e",
+        backgroundColor: "#fff5e7",
     },
     title: {
         fontSize: 25,
         marginLeft: 25
     },
     pict: {
-        width: 55,
-        height: 55,
+        width: 50,
+        height: 50,
         backgroundColor: '#e8e8e8',
         borderRadius: 50,
         marginLeft: 20
@@ -66,34 +69,27 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#ffffff',
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    name: {
-        color: '#ffffff',
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    name: {
-        color: '#ffffff',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     status: {
         color: '#ffffff',
-        fontSize: 18
     },
     inputChat: {
         flexDirection: 'row',
         position: 'absolute',
         padding: 10,
         bottom: -4,
-        backgroundColor: '#ffffff'
+        height: 50,
+        width: 359,
+        backgroundColor: '#ecccb4',
+        borderRadius: 25
     },
     textInput: {
-        width: 225,
-        fontSize: 20,
-        marginLeft: 5
+        width: 230,
+        height: 50,
+        fontSize: 18,
+        marginLeft: 8
     },
     write: {
         flexDirection: 'row'

@@ -28,7 +28,7 @@ const Register = () => {
     return (
         <>
             <Header style={styles.header} transparent>
-                <StatusBar backgroundColor={'#1c3661'}/>
+                <StatusBar backgroundColor={'#421908'}/>
                 <Button transparent onPress={() => navigation.goBack()}>
                     <Icon name='arrow-left' size={22} color="#ffffff"/>
                 </Button>
@@ -59,7 +59,7 @@ export default Register
 
 const styles = StyleSheet.create({
     header:{
-        backgroundColor: '#1c3661'
+        backgroundColor: '#421908'
     },
     title: {
         fontSize: 25,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     parrent: {
         paddingRight: 15,
         flex: 1,
-        backgroundColor: "#fffef2",
+        backgroundColor: "#fff5e7",
         paddingTop: 25,
         alignItems: 'center'
     },
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     txtInput: {
-        borderBottomColor: 'darkblue',
+        borderBottomColor: '#421908',
         borderBottomWidth: 2,
         textAlign: 'center',
         margin: 5,
@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 50,
         justifyContent: 'center',
-        backgroundColor: '#1c3661'
+        backgroundColor: '#421908'
     },
 })

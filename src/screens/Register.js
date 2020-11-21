@@ -8,7 +8,7 @@ const Register = () => {
     const navigation = useNavigation()
     return (
         <>
-        <StatusBar backgroundColor={'#1c3661'}/>
+        <StatusBar backgroundColor={'#421908'}/>
             <Container style={styles.parrent}>
                 <Form>
                     <Item>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     parrent: {
         paddingRight: 15,
         flex: 1,
-        backgroundColor: "#fffef2",
+        backgroundColor: "#fff5e7",
         paddingTop: 25
     },
     container: {
@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 50,
         justifyContent: 'center',
-        backgroundColor: '#1c3661'
+        backgroundColor: '#421908'
     },
 })

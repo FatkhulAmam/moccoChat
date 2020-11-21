@@ -46,7 +46,7 @@ const Route = () => {
                         options={{
                             title: 'Your Phone',
                             headerStyle: {
-                                backgroundColor: '#1c3661',
+                                backgroundColor: '#421908',
                             },
                             headerTintColor: '#fff',
                             headerTitleStyle: {

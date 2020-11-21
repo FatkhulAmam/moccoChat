@@ -1,18 +1,21 @@
-import React from 'react'
-import { StyleSheet, Image, View, StatusBar } from 'react-native'
-import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text, Left } from 'native-base';
+import React, { useState } from 'react'
+import { StyleSheet, Image, View, StatusBar, Switch } from 'react-native'
+import { Button, Text } from 'native-base';
 import Icon from 'react-native-ionicons'
 
 import avatar from '../assets/images/profile.png'
 
 const MyProfile = () => {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
     return (
         <>
             <StatusBar translucent backgroundColor="transparent" />
             <View>
                 <Image style={styles.avatar} source={avatar} color="#000000" />
-                <Icon style={styles.back} android="arrow-back" />
-                <Icon style={styles.call} android="call" />
+                <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
+                <Icon style={styles.call} android="call" size={30} color="#ffffff" />
                 <Text style={styles.name}>Nama Temen</Text>
                 <Text style={styles.status}>online</Text>
             </View>
@@ -25,8 +28,19 @@ const MyProfile = () => {
                     <Text style={styles.bio}>bio</Text>
                 </View>
                 <View style={styles.notifContainer}>
-                    <Text style={styles.notif}>Notification</Text>
-                    <Text style={styles.notifStatus}>hidup</Text>
+                    <View style={styles.labelNotif}>
+                        <Text style={styles.notif}>Notification</Text>
+                        <Text style={styles.notifStatus}>hidup</Text>
+                    </View>
+                    <View style={styles.containerSwitch}>
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#fff5e7" }}
+                            thumbColor={isEnabled ? "#ce8b5c" : "#f4f3f4"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}
+                        />
+                    </View>
                 </View>
             </View>
             <View style={styles.btnCheck}>
@@ -47,15 +61,13 @@ const styles = StyleSheet.create({
     },
     back: {
         position: 'absolute',
-        fontSize: 40,
         left: 15,
-        top: 20
+        top: 30
     },
     call: {
         position: 'absolute',
-        fontSize: 35,
-        right: 24,
-        top: 25
+        right: 25,
+        top: 30
     },
     name: {
         position: 'absolute',
@@ -72,28 +84,33 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     div: {
-        padding: 20
+        padding: 20,
+        backgroundColor: '#421908'
     },
     info: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#ecccb4'
     },
     accountInfo: {
         borderBottomWidth: 1,
-        paddingBottom: 20
+        paddingBottom: 20,
     },
     number: {
         marginTop: 20,
         fontSize: 20,
+        color: '#ecccb4'
     },
     txtbio: {
         marginTop: 20,
         fontSize: 20,
+        color: '#ecccb4'
     },
     notif: {
-        marginTop: 20,
         fontSize: 20,
-    },btnCheck: {
+        color: '#ecccb4'
+    }, 
+    btnCheck: {
         position: 'absolute',
         bottom: 250,
         right: 15,
@@ -104,6 +121,29 @@ const styles = StyleSheet.create({
         height: 65,
         borderRadius: 50,
         justifyContent: 'center',
-        backgroundColor: '#1c3661'
+        backgroundColor: '#ecccb4'
     },
+    note: {
+        color: '#fff5e7'
+    },
+    bio: {
+        color: '#fff5e7'
+    },
+    labelNotif:{
+        borderRightWidth: 1,
+        width: 250,
+    },
+    notifStatus: {
+        color: '#fff5e7'
+    },
+    notifContainer: {
+        height: 70,
+        flexDirection: 'row',
+        alignItems: 'center',
+        top: 0
+    },
+    containerSwitch:{
+        flex: 1,
+        justifyContent: 'center'
+    }
 })

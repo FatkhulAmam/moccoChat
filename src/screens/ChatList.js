@@ -9,12 +9,11 @@ class Item extends React.Component {
         return (
             <>
                 <View style={styles.renderParent}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.moveDetailContact}>
                         <Image style={styles.pict} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.props.movePage}>
-                        <View>
-                            <Card style={styles.card} transparent>
+                    <TouchableOpacity style={styles.press} onPress={this.props.movePageChat}>
+                            <Card transparent>
                                 <View style={styles.headerChat}>
                                     <Text style={styles.name}>{this.props.name}</Text>
                                     <Right />
@@ -27,7 +26,6 @@ class Item extends React.Component {
                                     <Text style={styles.mount}>{this.props.mount}</Text>
                                 </View>
                             </Card>
-                        </View>
                     </TouchableOpacity>
                 </View>
             </>
@@ -62,14 +60,26 @@ const ChatList = () => {
         {
             name: 'lek',
             status: 'Kapan Kui??'
+        },
+        {
+            name: 'lek',
+            status: 'Kapan Kui??'
+        },
+        {
+            name: 'lek',
+            status: 'Kapan Kui??'
+        },
+        {
+            name: 'lek',
+            status: 'Kapan Kui??'
         }
     ]
     )
     return (
         <>
             <Header style={styles.header} transparent>
-            <StatusBar backgroundColor={'#1c3661'}/>
-                <Button transparent onPress={() => navigation.goBack()}>
+            <StatusBar backgroundColor={'#421908'}/>
+                <Button transparent onPress={() => navigation.goBack()} onPres={navigation.openDrawer}>
                     <Icon name='bars' size={22} color="#ffffff" />
                 </Button>
                 <Title style={styles.title}>Mocco Chat</Title>
@@ -87,7 +97,8 @@ const ChatList = () => {
                             name={item.name}
                             status={item.status}
                             mount={item.mount}
-                            movePage={() => navigation.navigate("ChatDetail")}
+                            movePageChat={() => navigation.navigate("ChatDetail")}
+                            moveDetailContact={() => navigation.navigate("ContactProfile")}
                         />
                     )}
                 />
@@ -105,12 +116,15 @@ export default ChatList
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#1c3661',
+        backgroundColor: '#421908',
         alignItems: 'center'
     },
     title: {
         fontSize: 25,
         marginLeft: 25
+    },
+    parrent:{
+        backgroundColor: '#fff5e7'
     },
     btnCheck: {
         position: 'absolute',
@@ -120,19 +134,20 @@ const styles = StyleSheet.create({
     },
     renderParent: {
         flexDirection: 'row',
-        margin: 10,
+        marginLeft: 10,
+        marginTop: 10,
         alignItems: 'center',
     },
     check: {
-        width: 65,
-        height: 65,
+        width: 60,
+        height: 60,
         borderRadius: 50,
         justifyContent: 'center',
-        backgroundColor: '#1c3661'
+        backgroundColor: '#421908'
     },
     pict: {
-        width: 65,
-        height: 65,
+        width: 55,
+        height: 55,
         backgroundColor: '#8e8e8e',
         borderRadius: 50,
     },
@@ -146,10 +161,11 @@ const styles = StyleSheet.create({
     status: {
         fontSize: 17
     },
-    card: {
+    press: {
         borderBottomWidth: 1,
         width: 270,
-        padding: 12
+        marginLeft: 10,
+        borderBottomColor: '#e8e8e8'
     },
     mount:{
         backgroundColor: 'lightblue',
