@@ -1,11 +1,30 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, TouchableOpacity, TextInput, StatusBar } from 'react-native'
 import { Container, Button, Text, Form, Header, Title, Right } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux'
+
+import {verifAction} from '../redux/action/verification'
 
 const Register = () => {
     const navigation = useNavigation()
+    const verification = useSelector(state => state.verification)
+    const dispatch = useDispatch()
+    const [CodeOne, setCode] = useState('')
+    const [CodeTwo, setCodeTwo] = useState('')
+    const [CodeThree, setCodeThree] = useState('')
+    const [CodeFour, setCodeFour] = useState('')
+
+    useEffect(() => {
+        console.log(CodeOne, CodeTwo, CodeThree, CodeFour);
+    }, [CodeOne, CodeTwo, CodeThree, CodeFour])
+
+    const enterCode = () => {
+        dispatch(verifAction(CodeOne, CodeTwo, CodeThree, CodeFour))
+        navigation.navigate('LandingPage')
+    }
+
     return (
         <>
             <Header style={styles.header} transparent>
@@ -21,15 +40,14 @@ const Register = () => {
                 <Text style={styles.sms} note>Kode aktifasi sudah dikirim via SMS ke</Text>
                 <Text styles={styles.no}>Nomor</Text>
                 <Form style={styles.container}>
-                    <TextInput style={styles.txtInput}></TextInput>
-                    <TextInput style={styles.txtInput}></TextInput>
-                    <TextInput style={styles.txtInput}></TextInput>
-                    <TextInput style={styles.txtInput}></TextInput>
-                    <TextInput style={styles.txtInput}></TextInput>
+                    <TextInput name='code' value={CodeOne} style={styles.txtInput} onChangeText={CodeOne=>setCode(CodeOne)}/>
+                    <TextInput name='code' value={CodeTwo} style={styles.txtInput} onChangeText={CodeTwo=>setCodeTwo(CodeTwo)}/>
+                    <TextInput name='code' value={CodeThree} style={styles.txtInput} onChangeText={CodeThree=>setCodeThree(CodeThree)}/>
+                    <TextInput name='code' value={CodeFour} style={styles.txtInput} onChangeText={CodeFour=>setCodeFour(CodeFour)}/>
                 </Form>
             </Container>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
+                <Button style={styles.check} onPress={enterCode}>
                     <Icon name='arrow-right' size={30} color='#ffffff' />
                 </Button>
             </View>

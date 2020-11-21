@@ -3,6 +3,7 @@ import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from '
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch} from 'react-redux'
 
 class Item extends React.Component {
     render() {
@@ -23,6 +24,9 @@ class Item extends React.Component {
 
 const Landing = () => {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const verification = useSelector(state => state.vericication)
+
     const [data, setData] = useState([
         {
             name: 'ilham',
@@ -87,7 +91,7 @@ const Landing = () => {
                     )}
                 />
                 <View style={styles.btnCheck}>
-                    <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
+                    <Button style={styles.check} onPress={() => dispatch({ type: 'LOGOUT' })}>
                         <Icon name='pencil' size={30} color='#ffffff' />
                     </Button>
                 </View>
