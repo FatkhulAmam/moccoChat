@@ -60,7 +60,7 @@ const Landing = () => {
     return (
         <>
             <Header style={styles.header} transparent>
-                <Icon name='bars' size={22} color="#ffffff" onPress={() => navigation.DrawerOpen} />
+                <Icon name='bars' size={22} color="#ffffff" onPress={() => navigation.openDrawer()} />
                 <Title style={styles.title}>Mocco Chat</Title>
                 <Right />
                 <Button transparent onPress={() => navigation.navigate('')}>
@@ -91,7 +91,7 @@ const Landing = () => {
                     )}
                 />
                 <View style={styles.btnCheck}>
-                    <Button style={styles.check} onPress={() => dispatch({ type: 'LOGOUT' })}>
+                    <Button style={styles.check} >
                         <Icon name='pencil' size={30} color='#ffffff' />
                     </Button>
                 </View>

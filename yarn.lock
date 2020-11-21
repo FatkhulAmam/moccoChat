@@ -5929,6 +5929,11 @@ react-native-app-intro-slider@^4.0.4:
   resolved "https://registry.yarnpkg.com/react-native-app-intro-slider/-/react-native-app-intro-slider-4.0.4.tgz#fa5cda7057db62c448ac975ffd2ba0cff94cc8d8"
   integrity sha512-Zkjaol6X3BbZkHUpVDj2LjdidpS6rCgKi0fx80xgGKa0pHxBRd4swWTv2bHnnvu5k1/HXwYk0mY2TbK+2jHl5w==
 
+react-native-contacts@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-contacts/-/react-native-contacts-6.0.3.tgz#74066c53db88d865d4630d1539a6e8ca50607a93"
+  integrity sha512-JoiYBrJ2/sAgzhytwaa7ephmqXkxO0o2vk4eNyOb74WjZNIEiBdZdjxjB62Lt4zMDT/28NwRk82d5m5x92m3Kg==
+
 react-native-drawer@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"

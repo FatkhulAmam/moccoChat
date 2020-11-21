@@ -16,15 +16,17 @@ import ChatList from "../screens/ChatList"
 import ChatDetail from "../screens/ChatDetail"
 import MyProfile from "../screens/MyProfile"
 import ContactProfile from "../screens/ContactProfile"
+
 import { verifAction } from '../redux/action/verification';
+
+import { DrawerContent } from '../helpers/DrawerStyles'
 
 
 const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={LandingPage} />
-            <Drawer.Screen name="Chat" component={ChatList} />
-        </Drawer.Navigator>
+            <Drawer.Navigator  drawerContent={props => <DrawerContent {...props}/>}>
+                <Drawer.Screen name="Home" component={LandingPage} />
+            </Drawer.Navigator>
     );
 }
 
@@ -60,6 +62,7 @@ const Route = () => {
                         <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
                         <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
                         <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
                         <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 )}
