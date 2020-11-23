@@ -9,6 +9,20 @@ import MessageBubble from '../components/bubbleChat'
 const ChatDetail = () => {
     const navigation = useNavigation()
 
+    const [Data, setData] = useState([
+        {
+            mine: 'mine',
+            txt: 'onkline kapan wae pokmen kabari ya??'
+        },
+        {
+            txt: 'online'
+        },
+    ]
+    )
+    useEffect(() => {
+        console.log(Data);
+      });
+
     return (
         <>
             <TouchableOpacity onPress={() => navigation.navigate('ContactProfile')}>
@@ -29,12 +43,15 @@ const ChatDetail = () => {
                 </Header>
             </TouchableOpacity>
             <View style={styles.parrent}>
-                <MessageBubble 
-                    mine
-                    text="hello every body"
-                />
-                <MessageBubble
-                    text="hello whats up"
+                <FlatList
+                    data={Data}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => (
+                        <MessageBubble
+                            mine={item.mine}
+                            text={item.txt}
+                        />
+                    )}
                 />
             </View>
             <Card style={styles.inputChat} transparent>
