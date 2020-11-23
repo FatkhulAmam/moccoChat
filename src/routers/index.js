@@ -20,6 +20,7 @@ import ContactProfile from "../screens/ContactProfile"
 import { verifAction } from '../redux/action/verification';
 
 import { DrawerContent } from '../components/DrawerStyles'
+import Landing from '../screens/LandingPage';
 
 
 const DrawerNavigator = () => {
@@ -31,32 +32,40 @@ const DrawerNavigator = () => {
 }
 
 const Route = () => {
-    const verification = useSelector(state => state.verification.isCode)
+    const isRegister = useSelector(state => state.auth.isRegistry)
+    useEffect(() => {
+        console.log(isRegister);
+    })
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
-                <Stack.Screen
-                    name="Register"
-                    component={Register}
-                    options={{
-                        title: 'Your Phone',
-                        headerStyle: {
-                            backgroundColor: '#421908',
-                        },
-                        headerTintColor: '#fff',
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                        }
-                    }} />
-                <Stack.Screen name="Verification" component={Verification} options={{ headerShown: false }} />
-                <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
-                <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
-                <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
-                <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
-                <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
-            </Stack.Navigator>
+            {!isRegister ? (
+                <Stack.Navigator>
+                    <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
+                    <Stack.Screen
+                        name="Register"
+                        component={Register}
+                        options={{
+                            title: 'Your Phone',
+                            headerStyle: {
+                                backgroundColor: '#421908',
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            }
+                        }} />
+                        {/* stack verif screen */}
+                </Stack.Navigator>
+            ) : (
+                    <Stack.Navigator initialRouteName={"LandingPage"}>
+                        <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
+                        <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
+                        <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
+                        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+                    </Stack.Navigator>
+                )}
         </NavigationContainer>
     )
 }

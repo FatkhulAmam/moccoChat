@@ -1,11 +1,26 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, TouchableOpacity, StatusBar } from 'react-native'
 import { Container, Button, Text, Form, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux'
+
+import {makeAccount} from '../redux/action/auth'
 
 const Register = () => {
     const navigation = useNavigation()
+    const auth = useSelector(state => state.auth)
+    const [Phone, setPhone] = useState('')
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        console.log(Phone);
+    })
+
+    const InputRegister = async () => {
+        await dispatch(makeAccount(Phone))
+    }
+
     return (
         <>
         <StatusBar backgroundColor={'#421908'}/>
@@ -19,14 +34,14 @@ const Register = () => {
                             <Input value="+62" />
                         </Item>
                         <Item style={styles.phone}>
-                            <Input placeholder="Number Phone" />
+                            <Input placeholder="Number Phone" value={Phone} onChangeText={Phone => setPhone(Phone)}/>
                         </Item>
                     </View>
                 </Form>
                 <Text style={styles.textBottom} note>Please confirm your country code and enter your phone number </Text>
             </Container>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={() => navigation.navigate('Verification')}>
+                <Button style={styles.check} onPress={InputRegister}>
                     <Icon name='arrow-right' size={30} color='#ffffff' />
                 </Button>
             </View>
