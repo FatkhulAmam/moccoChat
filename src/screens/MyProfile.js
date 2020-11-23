@@ -2,21 +2,44 @@ import React, { useState } from 'react'
 import { StyleSheet, Image, View, StatusBar, Switch } from 'react-native'
 import { Button, Text } from 'native-base';
 import Icon from 'react-native-ionicons'
+import ImagePicker from 'react-native-image-picker';
 
 import avatar from '../assets/images/profile.png'
+
+const options = {
+    title: 'my picture',
+    takePhotoButtonTitle: 'Take Photo',
+    chooseFromLibraryButtonTitle: 'Choose Photo'
+}
 
 const MyProfile = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const {AvatarSource, setAvatarSource} = useState(null)
+
+    const takePictures = () => {
+        ImagePicker.showImagePicker(options, (response) => {
+            console.log('Response = ', response);
+           
+            if (response.didCancel) {
+              console.log('User cancelled image picker');
+            } else if (response.error) {
+              console.log('ImagePicker Error: ', response.error);
+            } else {
+              const source = { uri: response.uri };
+              setAvatarSource({AvatarSource: source})
+            }
+          });
+    }
 
     return (
         <>
             <StatusBar translucent backgroundColor="transparent" />
             <View>
-                <Image style={styles.avatar} source={avatar} color="#000000" />
+                <Image style={styles.avatar} source={AvatarSource} color="#000000" />
                 <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
                 <Icon style={styles.call} android="more" size={35} color="#ffffff" />
-                <Text style={styles.name}>Nama Temen</Text>
+                <Text style={styles.name}>Nama Gue</Text>
                 <Text style={styles.status}>online</Text>
             </View>
             <View style={styles.div}>
@@ -35,7 +58,7 @@ const MyProfile = () => {
                 </View>
             </View>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
+                <Button style={styles.check} onPress={takePictures}>
                     <Icon name='camera' color='#ffffff' />
                 </Button>
             </View>
@@ -87,7 +110,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 250,
         right: 15,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderRadius: 50,
     },
     check: {
         width: 65,
@@ -96,16 +120,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#ecccb4'
     },
-    border:{
+    border: {
         borderBottomWidth: 1,
         paddingBottom: 15,
         paddingTop: 15
     },
-    text:{
+    text: {
         fontSize: 20,
         color: '#ecccb4'
     },
-    tag:{
+    tag: {
         color: '#fff5e7'
     }
 })

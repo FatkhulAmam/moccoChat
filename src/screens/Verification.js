@@ -16,10 +16,6 @@ const Register = () => {
     const [CodeThree, setCodeThree] = useState('')
     const [CodeFour, setCodeFour] = useState('')
 
-    useEffect(() => {
-        console.log(CodeOne, CodeTwo, CodeThree, CodeFour);
-    }, [CodeOne, CodeTwo, CodeThree, CodeFour])
-
     const enterCode = () => {
         dispatch(verifAction(CodeOne, CodeTwo, CodeThree, CodeFour))
         navigation.navigate('LandingPage')

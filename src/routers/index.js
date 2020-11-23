@@ -19,23 +19,19 @@ import ContactProfile from "../screens/ContactProfile"
 
 import { verifAction } from '../redux/action/verification';
 
-import { DrawerContent } from '../helpers/DrawerStyles'
+import { DrawerContent } from '../components/DrawerStyles'
 
 
 const DrawerNavigator = () => {
     return (
-            <Drawer.Navigator  drawerContent={props => <DrawerContent {...props}/>}>
-                <Drawer.Screen name="Home" component={LandingPage} />
-            </Drawer.Navigator>
+        <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+            <Drawer.Screen name="Home" component={LandingPage} />
+        </Drawer.Navigator>
     );
 }
 
 const Route = () => {
     const verification = useSelector(state => state.verification.isCode)
-
-    useEffect(() => {
-        console.log(verification);
-    }, [verification])
 
     return (
         <NavigationContainer>

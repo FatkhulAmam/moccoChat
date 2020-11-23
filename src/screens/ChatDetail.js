@@ -4,12 +4,14 @@ import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-ionicons'
 
+import MessageBubble from '../components/bubbleChat'
+
 const ChatDetail = () => {
     const navigation = useNavigation()
 
     return (
         <>
-            <TouchableOpacity onPress={()=> navigation.navigate('ContactProfile')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ContactProfile')}>
                 <Header style={styles.header} transparent>
                     <StatusBar backgroundColor={'#421908'} />
                     <Button transparent onPress={() => navigation.goBack()}>
@@ -27,7 +29,13 @@ const ChatDetail = () => {
                 </Header>
             </TouchableOpacity>
             <View style={styles.parrent}>
-
+                <MessageBubble 
+                    mine
+                    text="hello every body"
+                />
+                <MessageBubble
+                    text="hello whats up"
+                />
             </View>
             <Card style={styles.inputChat} transparent>
                 <Body style={styles.write}>
@@ -93,5 +101,5 @@ const styles = StyleSheet.create({
     },
     write: {
         flexDirection: 'row'
-    }
+    },
 })
