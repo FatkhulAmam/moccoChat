@@ -35,33 +35,28 @@ const Route = () => {
 
     return (
         <NavigationContainer>
-            {!verification ? (
-                <Stack.Navigator>
-                    <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
-                    <Stack.Screen
-                        name="Register"
-                        component={Register}
-                        options={{
-                            title: 'Your Phone',
-                            headerStyle: {
-                                backgroundColor: '#421908',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                            }
-                        }} />
-                    <Stack.Screen name="Verification" component={Verification} options={{ headerShown: false }} />
-                </Stack.Navigator>
-            ) : (
-                    <Stack.Navigator>
-                        <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
-                        <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
-                        <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
-                        <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
-                        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
-                    </Stack.Navigator>
-                )}
+            <Stack.Navigator>
+                <Stack.Screen name="Intro" component={Intro} options={{ headerShown: false }} />
+                <Stack.Screen
+                    name="Register"
+                    component={Register}
+                    options={{
+                        title: 'Your Phone',
+                        headerStyle: {
+                            backgroundColor: '#421908',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        }
+                    }} />
+                <Stack.Screen name="Verification" component={Verification} options={{ headerShown: false }} />
+                <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
+                <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
+                <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
+                <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
+                <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+            </Stack.Navigator>
         </NavigationContainer>
     )
 }
