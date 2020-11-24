@@ -4,8 +4,9 @@ import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text } f
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
+import { API_URL } from '@env'
 
-import profile from '../assets/images/profile.png'
+import { getContactAction } from '../redux/action/contact';
 
 class Item extends React.Component {
     render() {
@@ -27,35 +28,14 @@ class Item extends React.Component {
 const Landing = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
+    const token = useSelector(state => state.auth.token)
     const verification = useSelector(state => state.vericication)
+    const contactData = useSelector(state => state.contact)
 
-    const [data, setData] = useState([
-        {
-            name: 'ilham',
-            status: 'online'
-        },
-        {
-            name: 'amam',
-            status: 'online'
-        },
-        {
-            name: 'sijo',
-            status: 'online'
-        },
-        {
-            name: 'lek',
-            status: 'online'
-        },
-        {
-            name: 'lek',
-            status: 'online'
-        },
-        {
-            name: 'lek',
-            status: 'online'
-        }
-    ]
-    )
+    useEffect(() => {
+        console.log(dispatch(getContactAction(token)));
+        console.log(API_URL)
+    }, [dispatch, token])
 
     return (
         <>
@@ -79,14 +59,14 @@ const Landing = () => {
                 <Text style={styles.kontakTxt}>Kontak anda di Mocco</Text>
                 <FlatList
                     style={styles.kontakData}
-                    data={data}
+                    data={contactData.data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <Item
-                            name={item.name}
-                            status={item.status}
-                            avatar={item.image}
-                            movePage={() => navigation.navigate("ChatList")}
+                            name={(item.user_name ? item.user_name : item.telphone)}
+                            phone={item.status}
+                            avatar={{uri: `${API_URL}${item.photo}`}}
+                            movePage={() => navigation.navigate("ChatDetail", item.id)}
                         />
                     )}
                 />

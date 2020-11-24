@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput, StatusBar } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput, StatusBar, Pressable } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux'
 import Icon from 'react-native-ionicons'
 
 import MessageBubble from '../components/bubbleChat'
+import {getChatDetail} from '../redux/action/sendChat'
 
-const ChatDetail = () => {
+const ChatDetail = ({route}) => {
     const navigation = useNavigation()
+    const [InputText, setInputText] = useState('')
+    const [Show, setShow] = useState(false)
+    const dispatch = useDispatch()
+    const token = useSelector(state => state.auth.token)
+    const getChat = useSelector(state => state.getChat)
+
+    useEffect(()=>{
+        dispatch(getChatDetail(token, route.params))
+        console.log(getChat)
+    },[dispatch, token, route.params])
 
     const [Data, setData] = useState([
         {
@@ -19,9 +31,6 @@ const ChatDetail = () => {
         },
     ]
     )
-    useEffect(() => {
-        console.log(Data);
-      });
 
     return (
         <>
@@ -44,12 +53,11 @@ const ChatDetail = () => {
             </TouchableOpacity>
             <View style={styles.parrent}>
                 <FlatList
-                    data={Data}
+                    data={getChat.data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <MessageBubble
-                            mine={item.mine}
-                            text={item.txt}
+                            text={item.message}
                         />
                     )}
                 />
@@ -57,9 +65,15 @@ const ChatDetail = () => {
             <Card style={styles.inputChat} transparent>
                 <Body style={styles.write}>
                     <Icon name='happy' size={30} color='#8e8e8e' />
-                    <TextInput style={styles.textInput} placeholder="Pesan" />
-                    <Icon name='attach' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
-                    <Icon name='mic' size={30} color='#8e8e8e' />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder="Pesan"
+                        onChangeText={InputText => setInputText(InputText)} />
+                    {/* <Icon name='attach' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
+                    <Icon name='mic' size={30} color='#8e8e8e' /> */}
+                    <TouchableOpacity transparent>
+                        <Icon name="send" color='#8e8e8e' style={{ marginLeft: 40 }} />
+                    </TouchableOpacity>
                 </Body>
             </Card>
         </>
