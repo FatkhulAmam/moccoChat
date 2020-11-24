@@ -2,7 +2,8 @@ const initialState = {
     data: [],
     isLoading: false,
     isError: false,
-    message: ''
+    message: '',
+    chatList : false
 }
   
 export default (state=initialState, action)=>{
@@ -24,6 +25,7 @@ export default (state=initialState, action)=>{
       case 'CHAT_LIST_FULFILLED': {
         return {
           ...state,
+          chatList: true,
           isLoading: false,
           isError: false,
           data: action.payload.data.results

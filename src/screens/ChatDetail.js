@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Icon from 'react-native-ionicons'
 
 import MessageBubble from '../components/bubbleChat'
-import { sendChatAction, getChatDetail } from '../redux/action/sendChat'
+import { sendChatAction, getChatDetail } from '../redux/action/chat'
 
 const ChatDetail = ({ route }) => {
     const navigation = useNavigation()

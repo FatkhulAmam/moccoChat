@@ -8,7 +8,7 @@ import Icon from 'react-native-ionicons'
 import { API_URL } from '@env'
 
 import avatar from '../assets/images/profile.png'
-import {getMyProfile} from '../redux/action/myProfile'
+import {getMyProfile} from '../redux/action/profile'
 
 export function DrawerContent(props) {
     const navigation = useNavigation()
@@ -30,7 +30,7 @@ export function DrawerContent(props) {
                     </View>
                 </TouchableOpacity>
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('ChatList')} style={styles.contact}>
+                    <TouchableOpacity onPress={() => navigation.navigate('contact')} style={styles.contact}>
                         <Icon name="contacts"/>
                         <Text style={styles.TxtDrawer}>Kontak</Text>
                     </TouchableOpacity>

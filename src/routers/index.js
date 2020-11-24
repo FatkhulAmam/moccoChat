@@ -16,6 +16,7 @@ import ChatList from "../screens/ChatList"
 import ChatDetail from "../screens/ChatDetail"
 import MyProfile from "../screens/MyProfile"
 import ContactProfile from "../screens/ContactProfile"
+import EditName from '../screens/editName'
 
 import { verifAction } from '../redux/action/verification';
 
@@ -24,15 +25,21 @@ import Landing from '../screens/LandingPage';
 
 
 const DrawerNavigator = () => {
+    const haveChat = useSelector(state => state.chatList.chatList)
     return (
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+        {!haveChat ? (
             <Drawer.Screen name="Home" component={LandingPage} />
+            ) : (
+            <Drawer.Screen name="Chat" component={ChatList} />
+            )}
         </Drawer.Navigator>
     );
 }
 
 const Route = () => {
     const isRegister = useSelector(state => state.auth.isRegistry)
+    const haveChat = useSelector(state => state.chatList.chatList)
     useEffect(() => {
         console.log(isRegister);
     })
@@ -55,15 +62,19 @@ const Route = () => {
                                 fontWeight: 'bold',
                             }
                         }} />
-                        {/* stack verif screen */}
+                    {/* stack verif screen */}
                 </Stack.Navigator>
             ) : (
-                    <Stack.Navigator initialRouteName={"LandingPage"}>
-                        <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
-                        <Stack.Screen name="ChatDetail" component={ChatDetail} options={{ headerShown: false }} />
-                        <Stack.Screen name="ContactProfile" component={ContactProfile} options={{ headerShown: false }} />
-                        <Stack.Screen name="ChatList" component={ChatList} options={{ headerShown: false }} />
-                        <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} />
+                    <Stack.Navigator>
+                        {!haveChat ? (
+                            <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
+                        ) : (
+                                <Stack.Screen name="ChatList" component={DrawerNavigator} options={{ headerShown: false }} />
+                            )}
+                        <Stack.Screen name='ChatDetail' component={ChatDetail} options={{ headerShown: false }} />
+                        <Stack.Screen name='MyProfile' component={MyProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name='ContactProfile' component={ContactProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name='EditName' component={EditName} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 )}
         </NavigationContainer>

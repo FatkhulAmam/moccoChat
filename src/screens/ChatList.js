@@ -35,7 +35,7 @@ class Item extends React.Component {
 
 import { useNavigation } from '@react-navigation/native';
 import {useSelector, useDispatch } from 'react-redux'
-import {getChatList} from '../redux/action/sendChat'
+import {getChatList} from '../redux/action/chat'
 
 const ChatList = () => {
     const navigation = useNavigation()
@@ -52,7 +52,7 @@ const ChatList = () => {
         <>
             <Header style={styles.header} transparent>
             <StatusBar backgroundColor={'#421908'}/>
-                <Button transparent onPress={() => navigation.goBack()} onPres={navigation.openDrawer}>
+                <Button transparent onPress={() => navigation.openDrawer()}>
                     <Icon name='bars' size={22} color="#ffffff" />
                 </Button>
                 <Title style={styles.title}>Mocco Chat</Title>
@@ -71,7 +71,7 @@ const ChatList = () => {
                             status={item.message}
                             mount={item.mount}
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
-                            moveDetailContact={() => navigation.navigate("ContactProfile")}
+                            moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
                         />
                     )}
                 />

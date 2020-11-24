@@ -8,7 +8,8 @@ import Icon from 'react-native-ionicons'
 import ImagePicker from 'react-native-image-picker';
 
 import avatar from '../assets/images/profile.png'
-import { getMyProfile } from '../redux/action/myProfile'
+import { getMyProfile } from '../redux/action/profile'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const options = {
     title: 'my picture',
@@ -61,10 +62,10 @@ const MyProfile = () => {
                     <Text style={styles.text}>{myProfile.data.telphone}</Text>
                     <Text style={styles.tag}>Phone</Text>
                 </View>
-                <View style={styles.border}>
-                    <Text style={styles.text}>{myProfile.data.user_name}</Text>
+                <TouchableOpacity style={styles.border} onPress={()=>navigation.navigate('EditName')}>
+                    <Text style={styles.text}>{myProfile.data.user_name ? myProfile.data.user_name : 'user name'}</Text>
                     <Text style={styles.tag}>name for your contact</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.border}>
                     <Text style={styles.text}>{myProfile.data.bio ? myProfile.data.bio : 'Bio'}</Text>
                     <Text style={styles.tag}>tambahkan beberapa tentang anda</Text>
