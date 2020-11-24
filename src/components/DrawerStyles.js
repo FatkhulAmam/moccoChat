@@ -1,25 +1,33 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text, Button } from 'native-base'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 import Icon from 'react-native-ionicons'
+import { API_URL } from '@env'
 
 import avatar from '../assets/images/profile.png'
+import {getMyProfile} from '../redux/action/myProfile'
 
 export function DrawerContent(props) {
     const navigation = useNavigation()
     const dispatch = useDispatch()
+    const myProfile = useSelector(state => state.myProfile)
+    const token = useSelector(state => state.auth.token)
+    useEffect(() => {
+        dispatch(getMyProfile(token))
+        console.log(API_URL)
+    }, [dispatch, token])
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff5e7', marginTop: -5 }}>
             <DrawerContentScrollView {...props} >
                 <TouchableOpacity style={styles.headDrawer} onPress={() => navigation.navigate('MyProfile')}>
-                    <Image source={avatar} style={styles.ava} />
+                    <Image source={{uri: `${API_URL}${myProfile.data.photo}`}} style={styles.ava} />
                     <View >
-                        <Text style={styles.name}>nama pengguna</Text>
-                        <Text style={styles.number}>No Telpon</Text>
+                        <Text style={styles.name}>{myProfile.data.user_name}</Text>
+                        <Text style={styles.number}>{myProfile.data.telphone}</Text>
                     </View>
                 </TouchableOpacity>
                 <View>
