@@ -2,35 +2,31 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput, StatusBar, Pressable } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Icon from 'react-native-ionicons'
 
 import MessageBubble from '../components/bubbleChat'
-import {getChatDetail} from '../redux/action/sendChat'
+import { sendChatAction, getChatDetail } from '../redux/action/sendChat'
 
-const ChatDetail = ({route}) => {
+const ChatDetail = ({ route }) => {
     const navigation = useNavigation()
-    const [InputText, setInputText] = useState('')
     const [Show, setShow] = useState(false)
     const dispatch = useDispatch()
     const token = useSelector(state => state.auth.token)
     const getChat = useSelector(state => state.getChat)
+    const sendChat = useSelector(state => state.sendChat)
 
-    useEffect(()=>{
+    const [recipient, setRecipient] = useState(route.params)
+    const [messages, setMessages] = useState('')
+
+    useEffect(() => {
         dispatch(getChatDetail(token, route.params))
-        console.log(getChat)
-    },[dispatch, token, route.params])
+        console.log(recipient)
+    }, [dispatch, token, route.params])
 
-    const [Data, setData] = useState([
-        {
-            mine: 'mine',
-            txt: 'onkline kapan wae pokmen kabari ya??'
-        },
-        {
-            txt: 'online'
-        },
-    ]
-    )
+    const sendMessages = async () => {
+        await dispatch(sendChatAction(token, messages, recipient))
+    }
 
     return (
         <>
@@ -57,6 +53,7 @@ const ChatDetail = ({route}) => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <MessageBubble
+                            mine={item.sender === route.params ? true : false}
                             text={item.message}
                         />
                     )}
@@ -68,10 +65,11 @@ const ChatDetail = ({route}) => {
                     <TextInput
                         style={styles.textInput}
                         placeholder="Pesan"
-                        onChangeText={InputText => setInputText(InputText)} />
+                        value={messages}
+                        onChangeText={messages => setMessages(messages)} />
                     {/* <Icon name='attach' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
                     <Icon name='mic' size={30} color='#8e8e8e' /> */}
-                    <TouchableOpacity transparent>
+                    <TouchableOpacity transparent onPress={sendMessages}>
                         <Icon name="send" color='#8e8e8e' style={{ marginLeft: 40 }} />
                     </TouchableOpacity>
                 </Body>
@@ -91,6 +89,7 @@ const styles = StyleSheet.create({
     parrent: {
         flex: 1,
         backgroundColor: "#fff5e7",
+        paddingBottom: 50
     },
     title: {
         fontSize: 25,

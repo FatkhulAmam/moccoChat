@@ -9,7 +9,7 @@ class bubbleChat extends React.Component {
         return (
             <View style={[styles.message, this.props.mine ? styles.mine : styles.not_mine]}>
                 <View style={[styles.cloud, {
-                    backgroundColor: this.props.mine ? "#dddddd" : "#007aff"
+                    backgroundColor: this.props.mine ? "#bcaaa4" : "#c66f3b"
                 }]}>
                     {this.props.image ? <Image
                         style={{ alignSelf: this.props.mine ? 'flex-start' : 'flex-end' }}
@@ -35,7 +35,7 @@ class bubbleChat extends React.Component {
                                     :
                                     "M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z"
                                 }
-                                fill={this.props.mine ? '#dddddd' : '#007AFF'}
+                                fill={this.props.mine ? '#bcaaa4' : '#c66f3b'}
                                 x="0"
                                 y="0"
                             />

@@ -1,9 +1,9 @@
 import http from '../../helpers/http'
 import qs from 'qs'
 
-const sendChatAction = (token, messages) => ({
+const sendChatAction = (token, messages, recipient) => ({
     type: 'SEND_CHAT',
-    payload: http(token).post('chat', qs.stringify({messages}))
+    payload: http(token).post('chat', qs.stringify({messages, recipient}))
 })
 
 const getChatDetail = (token, recipients) => ({
