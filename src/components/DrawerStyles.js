@@ -17,7 +17,6 @@ export function DrawerContent(props) {
     const token = useSelector(state => state.auth.token)
     useEffect(() => {
         dispatch(getMyProfile(token))
-        console.log(API_URL)
     }, [dispatch, token])
 
     return (

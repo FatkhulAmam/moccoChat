@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Image, View, StatusBar, Switch } from 'react-native'
 import { Button, Text } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux'
+import { API_URL } from '@env'
 import Icon from 'react-native-ionicons'
 import ImagePicker from 'react-native-image-picker';
 
 import avatar from '../assets/images/profile.png'
+import { getMyProfile } from '../redux/action/myProfile'
 
 const options = {
     title: 'my picture',
@@ -15,45 +19,54 @@ const options = {
 const MyProfile = () => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    const {AvatarSource, setAvatarSource} = useState(null)
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const myProfile = useSelector(state => state.myProfile)
+    const [AvatarSource, setAvatarSource] = useState(`${API_URL}${myProfile.data.photo}`)
+    const token = useSelector(state => state.auth.token)
+    useEffect(() => {
+        dispatch(getMyProfile(token))
+        console.log(`${API_URL}${myProfile.data.photo}`)
+    }, [dispatch, token])
 
     const takePictures = () => {
         ImagePicker.showImagePicker(options, (response) => {
             console.log('Response = ', response);
-           
+
             if (response.didCancel) {
-              console.log('User cancelled image picker');
+                console.log('User cancelled image picker');
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+                console.log('ImagePicker Error: ', response.error);
             } else {
-              const source = { uri: response.uri };
-              setAvatarSource({AvatarSource: source})
+                const source = { uri: response.uri };
+                console.log(source)
+                setAvatarSource({ AvatarSource: source })
             }
-          });
+        });
     }
 
     return (
         <>
             <StatusBar translucent backgroundColor="transparent" />
             <View>
-                <Image style={styles.avatar} source={AvatarSource} color="#000000" />
+                <Image style={styles.avatar} source={{ uri: AvatarSource }} color="#000000" />
                 <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
                 <Icon style={styles.call} android="more" size={35} color="#ffffff" />
-                <Text style={styles.name}>Nama Gue</Text>
+                <Text style={styles.name}>{myProfile.data.user_name ? myProfile.data.user_name : myProfile.data.telphone}</Text>
                 <Text style={styles.status}>online</Text>
             </View>
             <View style={styles.div}>
                 <Text style={styles.info}>Akun</Text>
                 <View style={styles.border}>
-                    <Text style={styles.text}>0976543234567890</Text>
+                    <Text style={styles.text}>{myProfile.data.telphone}</Text>
                     <Text style={styles.tag}>Phone</Text>
                 </View>
                 <View style={styles.border}>
-                    <Text style={styles.text}>User name</Text>
-                    <Text style={styles.tag}>tidak diseting</Text>
+                    <Text style={styles.text}>{myProfile.data.user_name}</Text>
+                    <Text style={styles.tag}>name for your contact</Text>
                 </View>
                 <View style={styles.border}>
-                    <Text style={styles.text}>Bio</Text>
+                    <Text style={styles.text}>{myProfile.data.bio ? myProfile.data.bio : 'Bio'}</Text>
                     <Text style={styles.tag}>tambahkan beberapa tentang anda</Text>
                 </View>
             </View>
