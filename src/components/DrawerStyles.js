@@ -30,7 +30,7 @@ export function DrawerContent(props) {
                     </View>
                 </TouchableOpacity>
                 <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Contact')} style={styles.contact}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ChatList')} style={styles.contact}>
                         <Icon name="contacts"/>
                         <Text style={styles.TxtDrawer}>Kontak</Text>
                     </TouchableOpacity>

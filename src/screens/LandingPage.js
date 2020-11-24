@@ -17,7 +17,7 @@ class Item extends React.Component {
                     <Image style={styles.pict} />
                     <View>
                         <Text style={styles.name}>{this.props.name}</Text>
-                        <Text style={styles.status}>{this.props.status}</Text>
+                        <Text style={styles.status}>{this.props.phone}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -64,7 +64,7 @@ const Landing = () => {
                     renderItem={({ item, index }) => (
                         <Item
                             name={(item.user_name ? item.user_name : item.telphone)}
-                            phone={item.status}
+                            phone={item.telphone}
                             avatar={{uri: `${API_URL}${item.photo}`}}
                             movePage={() => navigation.navigate("ChatDetail", item.id)}
                         />

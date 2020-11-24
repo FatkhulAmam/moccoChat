@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from 'react-native'
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text, Left } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { useNavigation } from '@react-navigation/native';
+import { API_URL } from '@env'
 
 class Item extends React.Component {
     render() {
@@ -33,48 +33,21 @@ class Item extends React.Component {
     }
 }
 
+import { useNavigation } from '@react-navigation/native';
+import {useSelector, useDispatch } from 'react-redux'
+import {getChatList} from '../redux/action/sendChat'
+
 const ChatList = () => {
     const navigation = useNavigation()
-    const [data, setData] = useState([
-        {
-            name: 'ilham',
-            status: 'Ok Syapp',
-            mount: '2'
-        },
-        {
-            name: 'amam',
-            status: 'jos'
-        },
-        {
-            name: 'sijo',
-            status: 'Oraapa'
-        },
-        {
-            name: 'lek',
-            status: 'Ngesok Wae'
-        },
-        {
-            name: 'lek',
-            status: 'OKOK'
-        },
-        {
-            name: 'lek',
-            status: 'Kapan Kui??'
-        },
-        {
-            name: 'lek',
-            status: 'Kapan Kui??'
-        },
-        {
-            name: 'lek',
-            status: 'Kapan Kui??'
-        },
-        {
-            name: 'lek',
-            status: 'Kapan Kui??'
-        }
-    ]
-    )
+    const dispatch = useDispatch()
+    const token = useSelector(state => state.auth.token)
+    const listChat = useSelector(state => state.chatList)
+
+    useEffect(() => {
+        console.log(dispatch(getChatList(token)));
+        console.log(listChat)
+    }, [dispatch, token])
+
     return (
         <>
             <Header style={styles.header} transparent>
@@ -90,14 +63,14 @@ const ChatList = () => {
             </Header>
             <Container style={styles.parrent}>
                 <FlatList
-                    data={data}
+                    data={listChat.data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <Item
-                            name={item.name}
-                            status={item.status}
+                            name={item.recipientDetail.user_name ? item.recipientDetail.user_name : item.recipientDetail.telphone}
+                            status={item.message}
                             mount={item.mount}
-                            movePageChat={() => navigation.navigate("ChatDetail")}
+                            movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile")}
                         />
                     )}
