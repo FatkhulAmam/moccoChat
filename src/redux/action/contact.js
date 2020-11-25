@@ -5,4 +5,9 @@ const getContactAction = (token) =>({
     payload: http(token).get('user')
 })
 
-export { getContactAction } 
+const getContactDetail = (token, id) =>({
+    type: 'CONTACT_DETAIL',
+    payload: http(token).get(`user/contact/${id}`)
+})
+
+export { getContactAction, getContactDetail } 

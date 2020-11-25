@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Image, View, StatusBar, Switch } from 'react-native'
 import { Button, Text } from 'native-base';
 import Icon from 'react-native-ionicons'
+import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux'
 
 import avatar from '../assets/images/profile.png'
+import {getContactDetail} from '../redux/action/contact'
 
-const MyProfile = () => {
+const MyProfile = ({route}) => {
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const token = useSelector(state => state.auth.token)
+    const dataContact = useSelector(state => state.detailContact.data)
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    
+    useEffect(() => {
+        dispatch(getContactDetail(token, route.params))
+        console.log(route.params);
+    },[dispatch, token, route.params])
 
     return (
         <>
@@ -16,15 +28,15 @@ const MyProfile = () => {
                 <Image style={styles.avatar} source={avatar} color="#000000" />
                 <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
                 <Icon style={styles.call} android="call" size={30} color="#ffffff" />
-                <Text style={styles.name}>Nama Temen</Text>
+                <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : detailContact.telphone}</Text>
                 <Text style={styles.status}>online</Text>
             </View>
             <View style={styles.div}>
                 <Text style={styles.info}>Info</Text>
                 <View style={styles.accountInfo}>
-                    <Text style={styles.number}>00000000000000</Text>
+                    <Text style={styles.number}>{dataContact.telphone}</Text>
                     <Text style={styles.note}>ponsel</Text>
-                    <Text style={styles.txtbio}>it's ok may boy</Text>
+                    <Text style={styles.txtbio}>{dataContact.bio ? dataContact.bio : "contact Bio "}</Text>
                     <Text style={styles.bio}>bio</Text>
                 </View>
                 <View style={styles.notifContainer}>
@@ -44,7 +56,7 @@ const MyProfile = () => {
                 </View>
             </View>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
+                <Button style={styles.check} onPress={() => navigation.navigate("ChatDetail", dataContact.id)}>
                     <Icon name='chatboxes' color='#ffffff' />
                 </Button>
             </View>
