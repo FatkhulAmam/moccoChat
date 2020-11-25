@@ -38,16 +38,32 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getChatList } from '../redux/action/chat'
 
 const ChatList = () => {
+    const [dataNew, setDataNew] = useState('')
+
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const token = useSelector(state => state.auth.token)
     const profileId = useSelector(state => state.myProfile.data.id)
-    const listChat = useSelector(state => state.chatList)
+    const {data} = useSelector(state => state.chatList)
 
     useEffect(() => {
         console.log(dispatch(getChatList(token)));
-        console.log(profileId);
-    }, [dispatch, token])
+        setDataNew(data.results)
+    }, [dispatch, token, data])
+
+    const nextPage = async () => {
+        const {nextLink} = data.pageInfo
+        if (nextLink) {
+            const res = axios.get(nextLink)
+            const {results} = res.data
+            const newData = {
+                ...data,
+                results: [...data.results, ...results],
+                pageInfo: res.data.pageInfo
+            }
+            setDataNew(newData)
+        }
+    } 
 
     return (
         <>
@@ -64,7 +80,7 @@ const ChatList = () => {
             </Header>
             <Container style={styles.parrent}>
                 <FlatList
-                    data={listChat.data}
+                    data={dataNew}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         profileId !== item.recipientDetail.id ? (
@@ -74,6 +90,8 @@ const ChatList = () => {
                             mount={item.mount}
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
+                            onEndReached = {nextPage}
+                            onEndReachedThreshold = {0.5}
                         />
                         ) : (
                             <Item

@@ -28,7 +28,7 @@ export default (state=initialState, action)=>{
           chatList: true,
           isLoading: false,
           isError: false,
-          data: action.payload.data.results
+          data: action.payload.data
         }
       }
       default : {
