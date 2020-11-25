@@ -57,7 +57,7 @@ const ChatList = () => {
                 </Button>
                 <Title style={styles.title}>Mocco Chat</Title>
                 <Right />
-                <Button transparent onPress={() => navigation.navigate('')}>
+                <Button transparent onPress={() => navigation.navigate('Search')}>
                     <Icon name='search' size={22} color="#ffffff" />
                 </Button>
             </Header>

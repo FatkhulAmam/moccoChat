@@ -11,6 +11,7 @@ import editName from './editName'
 import editBio from './editBio'
 import detailContact from './detailContact'
 import avatar from './updateAvatar'
+import search from './searchContact'
 
 export default combineReducers({
     verification,
@@ -23,5 +24,6 @@ export default combineReducers({
     editName,
     editBio,
     detailContact,
-    avatar
+    avatar,
+    search
 })

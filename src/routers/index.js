@@ -16,9 +16,10 @@ import ChatList from "../screens/ChatList"
 import ChatDetail from "../screens/ChatDetail"
 import MyProfile from "../screens/MyProfile"
 import ContactProfile from "../screens/ContactProfile"
-import EditName from '../screens/editName'
-import EditBio from '../screens/editBio'
-import SetName from '../screens/setName'
+import EditName from '../screens/EditName'
+import EditBio from '../screens/EditBio'
+import SetName from '../screens/SetName'
+import Search from '../screens/Search'
 
 import { verifAction } from '../redux/action/verification';
 
@@ -65,10 +66,10 @@ const Route = () => {
                             }
                         }} />
                     {/* stack verif screen */}
+                    <Stack.Screen name="SetName" component={SetName} options={{ headerShown: false }} />
                 </Stack.Navigator>
             ) : (
                     <Stack.Navigator>
-                    <Stack.Screen name="SetName" component={SetName} options={{ headerShown: false }} />
                         {!haveChat ? (
                             <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
                         ) : (
@@ -79,6 +80,7 @@ const Route = () => {
                         <Stack.Screen name='ContactProfile' component={ContactProfile} options={{ headerShown: false }} />
                         <Stack.Screen name='EditName' component={EditName} options={{ headerShown: false }} />
                         <Stack.Screen name='EditBio' component={EditBio} options={{ headerShown: false }} />
+                        <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 )}
         </NavigationContainer>

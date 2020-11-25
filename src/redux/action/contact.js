@@ -10,4 +10,9 @@ const getContactDetail = (token, id) =>({
     payload: http(token).get(`user/contact/${id}`)
 })
 
-export { getContactAction, getContactDetail } 
+const searchContact = (token, searchValue) =>({
+    type: 'SEARCH_CONTACT',
+    payload: http(token).get(`user?search[user_name]=${searchValue}`)
+})
+
+export { getContactAction, getContactDetail, searchContact } 
