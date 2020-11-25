@@ -1,7 +1,8 @@
 const initialState = {
     isLoading: false,
     isError: false,
-    message: ''
+    message: '',
+    editName: false
 }
 
 export default (state = initialState, action) => {
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isError: false,
                 isLoading:false,
+                editName: true,
                 message: 'edit name success'
             }
         }

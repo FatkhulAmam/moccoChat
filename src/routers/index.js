@@ -18,6 +18,7 @@ import MyProfile from "../screens/MyProfile"
 import ContactProfile from "../screens/ContactProfile"
 import EditName from '../screens/editName'
 import EditBio from '../screens/editBio'
+import SetName from '../screens/setName'
 
 import { verifAction } from '../redux/action/verification';
 
@@ -42,7 +43,7 @@ const Route = () => {
     const isRegister = useSelector(state => state.auth.isRegistry)
     const haveChat = useSelector(state => state.chatList.chatList)
     useEffect(() => {
-        console.log(isRegister);
+        console.log(haveChat);
     })
 
     return (
@@ -67,6 +68,7 @@ const Route = () => {
                 </Stack.Navigator>
             ) : (
                     <Stack.Navigator>
+                    <Stack.Screen name="SetName" component={SetName} options={{ headerShown: false }} />
                         {!haveChat ? (
                             <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
                         ) : (
