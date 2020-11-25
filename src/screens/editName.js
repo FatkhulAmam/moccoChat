@@ -5,20 +5,20 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { makeAccount } from '../redux/action/auth'
+import { editMyName } from '../redux/action/profile'
 
-const Register = () => {
+const ChangeName = () => {
     const navigation = useNavigation()
-    const auth = useSelector(state => state.auth)
-    const [Phone, setPhone] = useState('')
+    const token = useSelector(state => state.auth.token)
+    const [user_name, setName] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(Phone);
+        console.log(user_name);
     })
 
-    const InputRegister = async () => {
-        await dispatch(makeAccount(Phone))
+    const InputName = async () => {
+        await dispatch(editMyName(token, user_name))
     }
 
     return (
@@ -27,13 +27,13 @@ const Register = () => {
             <Container style={styles.parrent}>
                 <Form>
                     <Item style={styles.name}>
-                        <Input placeholder="user name" value={Phone} onChangeText={Phone => setPhone(Phone)} />
+                        <Input placeholder="user name" value={user_name} onChangeText={user_name => setName(user_name)} />
                     </Item>
                 </Form>
                 <Text style={styles.textBottom} note>please tell your name </Text>
             </Container>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={InputRegister}>
+                <Button style={styles.check} onPress={InputName}>
                     <Icon name='check' size={30} color='#ffffff' />
                 </Button>
             </View>
@@ -41,7 +41,7 @@ const Register = () => {
     )
 }
 
-export default Register
+export default ChangeName
 
 const styles = StyleSheet.create({
     parrent: {

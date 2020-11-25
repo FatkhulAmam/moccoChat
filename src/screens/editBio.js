@@ -5,20 +5,20 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { makeAccount } from '../redux/action/auth'
+import { editBio } from '../redux/action/profile'
 
-const Register = () => {
+const AddBio = () => {
     const navigation = useNavigation()
-    const auth = useSelector(state => state.auth)
-    const [Phone, setPhone] = useState('')
+    const token = useSelector(state => state.auth.token)
+    const [Bio, setBio] = useState('')
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(Phone);
+        console.log(Bio);
     })
 
-    const InputRegister = async () => {
-        await dispatch(makeAccount(Phone))
+    const InputBio = async () => {
+        await dispatch(editBio(token, Bio))
     }
 
     return (
@@ -27,13 +27,13 @@ const Register = () => {
             <Container style={styles.parrent}>
                 <Form>
                     <Item style={styles.bio}>
-                        <Input placeholder="Bio" value={Phone} onChangeText={Phone => setPhone(Phone)} />
+                        <Input placeholder="Bio" value={Bio} onChangeText={Bio => setBio(Bio)} />
                     </Item>
                 </Form>
                 <Text style={styles.textBottom} note>please tell your contact about you, or your activities </Text>
             </Container>
             <View style={styles.btnCheck}>
-                <Button style={styles.check} onPress={InputRegister}>
+                <Button style={styles.check} onPress={InputBio}>
                     <Icon name='check' size={30} color='#ffffff' />
                 </Button>
             </View>
@@ -41,7 +41,7 @@ const Register = () => {
     )
 }
 
-export default Register
+export default AddBio
 
 const styles = StyleSheet.create({
     parrent: {

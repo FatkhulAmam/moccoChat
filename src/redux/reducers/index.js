@@ -7,6 +7,7 @@ import getChat from './getChatDetail'
 import chatList from './getChatList'
 import contact from './contact'
 import myProfile from './getMyProfile';
+import editName from './editName'
 
 export default combineReducers({
     verification,
@@ -15,5 +16,6 @@ export default combineReducers({
     contact,
     getChat,
     chatList,
-    myProfile
+    myProfile,
+    editName
 })
