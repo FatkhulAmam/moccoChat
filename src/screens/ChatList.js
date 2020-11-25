@@ -13,19 +13,19 @@ class Item extends React.Component {
                         <Image style={styles.pict} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.press} onPress={this.props.movePageChat}>
-                            <Card transparent>
-                                <View style={styles.headerChat}>
-                                    <Text style={styles.name}>{this.props.name}</Text>
-                                    <Right />
-                                    <Icon name="check"/>
-                                    <Text style={styles.date} note>time</Text>
-                                </View>
-                                <View style={styles.headerChat}>
-                                    <Text style={styles.status} note>{this.props.status}</Text>
-                                    <Right />
-                                    <Text style={styles.mount}>{this.props.mount}</Text>
-                                </View>
-                            </Card>
+                        <Card transparent>
+                            <View style={styles.headerChat}>
+                                <Text style={styles.name}>{this.props.name}</Text>
+                                <Right />
+                                <Icon name="check" />
+                                <Text style={styles.date} note>time</Text>
+                            </View>
+                            <View style={styles.headerChat}>
+                                <Text style={styles.status} note>{this.props.status}</Text>
+                                <Right />
+                                <Text style={styles.mount}>{this.props.mount}</Text>
+                            </View>
+                        </Card>
                     </TouchableOpacity>
                 </View>
             </>
@@ -34,24 +34,25 @@ class Item extends React.Component {
 }
 
 import { useNavigation } from '@react-navigation/native';
-import {useSelector, useDispatch } from 'react-redux'
-import {getChatList} from '../redux/action/chat'
+import { useSelector, useDispatch } from 'react-redux'
+import { getChatList } from '../redux/action/chat'
 
 const ChatList = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
     const token = useSelector(state => state.auth.token)
+    const profileId = useSelector(state => state.myProfile.data.id)
     const listChat = useSelector(state => state.chatList)
 
     useEffect(() => {
         console.log(dispatch(getChatList(token)));
-        console.log(listChat)
+        console.log(profileId);
     }, [dispatch, token])
 
     return (
         <>
             <Header style={styles.header} transparent>
-            <StatusBar backgroundColor={'#421908'}/>
+                <StatusBar backgroundColor={'#421908'} />
                 <Button transparent onPress={() => navigation.openDrawer()}>
                     <Icon name='bars' size={22} color="#ffffff" />
                 </Button>
@@ -66,6 +67,7 @@ const ChatList = () => {
                     data={listChat.data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
+                        profileId !== item.recipientDetail.id ? (
                         <Item
                             name={item.recipientDetail.user_name ? item.recipientDetail.user_name : item.recipientDetail.telphone}
                             status={item.message}
@@ -73,6 +75,15 @@ const ChatList = () => {
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
                         />
+                        ) : (
+                            <Item
+                                name={item.senderDetail.user_name ? item.senderDetail.user_name : item.senderDetail.telphone}
+                                status={item.message}
+                                mount={item.mount}
+                                movePageChat={() => navigation.navigate("ChatDetail", item.senderDetail.id)}
+                                moveDetailContact={() => navigation.navigate("ContactProfile", item.senderDetail.id)}
+                            />
+                        )
                     )}
                 />
                 <View style={styles.btnCheck}>
@@ -96,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginLeft: 25
     },
-    parrent:{
+    parrent: {
         backgroundColor: '#fff5e7'
     },
     btnCheck: {
@@ -140,7 +151,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         borderBottomColor: '#e8e8e8'
     },
-    mount:{
+    mount: {
         backgroundColor: 'lightblue',
         width: 25,
         height: 25,
