@@ -3,39 +3,12 @@ import { StyleSheet, View, FlatList, TouchableOpacity, Image, StatusBar } from '
 import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text, Left } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { API_URL } from '@env'
-
-class Item extends React.Component {
-    render() {
-        return (
-            <>
-                <View style={styles.renderParent}>
-                    <TouchableOpacity onPress={this.props.moveDetailContact}>
-                        <Image style={styles.pict} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.press} onPress={this.props.movePageChat}>
-                        <Card transparent>
-                            <View style={styles.headerChat}>
-                                <Text style={styles.name}>{this.props.name}</Text>
-                                <Right />
-                                <Icon name="check" />
-                                <Text style={styles.date} note>time</Text>
-                            </View>
-                            <View style={styles.headerChat}>
-                                <Text style={styles.status} note>{this.props.status}</Text>
-                                <Right />
-                                <Text style={styles.mount}>{this.props.mount}</Text>
-                            </View>
-                        </Card>
-                    </TouchableOpacity>
-                </View>
-            </>
-        )
-    }
-}
+import moment from 'moment'
 
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 import { getChatList } from '../redux/action/chat'
+import ListChat from '../components/ListChat'
 
 const ChatList = () => {
     const [dataNew, setDataNew] = useState('')
@@ -57,8 +30,8 @@ const ChatList = () => {
             const res = axios.get(nextLink)
             const {results} = res.data
             const newData = {
-                ...data,
-                results: [...data.results, ...results],
+                ...dataNew,
+                results: [...dataNew.results, ...results],
                 pageInfo: res.data.pageInfo
             }
             setDataNew(newData)
@@ -84,22 +57,27 @@ const ChatList = () => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         profileId !== item.recipientDetail.id ? (
-                        <Item
+                        <ListChat
                             name={item.recipientDetail.user_name ? item.recipientDetail.user_name : item.recipientDetail.telphone}
-                            status={item.message}
-                            mount={item.mount}
+                            lastMessage={item.message}
+                            time={moment(item.createdAt).format("LT")}
+                            avatar={{uri: `${API_URL}${item.recipientDetail.photo}`}}
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
                             onEndReached = {nextPage}
                             onEndReachedThreshold = {0.5}
                         />
                         ) : (
-                            <Item
+                            <ListChat
                                 name={item.senderDetail.user_name ? item.senderDetail.user_name : item.senderDetail.telphone}
-                                status={item.message}
-                                mount={item.mount}
+                                time={item.createdAt}
+                                lastMessage={item.message}
+                                time={moment(item.createdAt).format("LT")}
+                                avatar={{uri: `${API_URL}${item.recipientDetail.photo}`}}
                                 movePageChat={() => navigation.navigate("ChatDetail", item.senderDetail.id)}
                                 moveDetailContact={() => navigation.navigate("ContactProfile", item.senderDetail.id)}
+                                onEndReached = {nextPage}
+                                onEndReachedThreshold = {0.5}
                             />
                         )
                     )}
