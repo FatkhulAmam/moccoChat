@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Image, View, StatusBar, Switch } from 'react-native'
+import { StyleSheet, Image, View, StatusBar, Switch, TouchableOpacity } from 'react-native'
 import { Button, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,8 +8,7 @@ import Icon from 'react-native-ionicons'
 import ImagePicker from 'react-native-image-picker';
 
 import avatar from '../assets/images/profile.png'
-import { getMyProfile } from '../redux/action/profile'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getMyProfile, editAvatar } from '../redux/action/profile'
 
 const options = {
     title: 'my picture',
@@ -27,7 +26,7 @@ const MyProfile = () => {
     const token = useSelector(state => state.auth.token)
     useEffect(() => {
         dispatch(getMyProfile(token))
-        console.log(`${API_URL}${myProfile.data.photo}`)
+        console.log(AvatarSource)
     }, [dispatch, token])
 
     const takePictures = () => {
@@ -39,9 +38,15 @@ const MyProfile = () => {
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             } else {
-                const source = { uri: response.uri };
-                console.log(source)
-                setAvatarSource({ AvatarSource: source })
+                setAvatarSource(response.uri)
+                const form = new FormData();
+                form.append('pictures', {
+                    uri: response.uri,
+                    name: response.fileName,
+                    type: response.type,
+                });
+                console.log(form);
+                dispatch(editAvatar(token, form))
             }
         });
     }
@@ -62,11 +67,11 @@ const MyProfile = () => {
                     <Text style={styles.text}>{myProfile.data.telphone}</Text>
                     <Text style={styles.tag}>Phone</Text>
                 </View>
-                <TouchableOpacity style={styles.border} onPress={()=>navigation.navigate('EditName')}>
+                <TouchableOpacity style={styles.border} onPress={() => navigation.navigate('EditName')}>
                     <Text style={styles.text}>{myProfile.data.user_name ? myProfile.data.user_name : 'user name'}</Text>
                     <Text style={styles.tag}>name for your contact</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.border} onPress={()=>navigation.navigate('EditBio')}>
+                <TouchableOpacity style={styles.border} onPress={() => navigation.navigate('EditBio')}>
                     <Text style={styles.text}>{myProfile.data.bio ? myProfile.data.bio : 'Bio'}</Text>
                     <Text style={styles.tag}>tambahkan beberapa tentang anda</Text>
                 </TouchableOpacity>

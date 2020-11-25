@@ -76,7 +76,7 @@ const ChatList = () => {
                     )}
                 />
                 <View style={styles.btnCheck}>
-                    <Button style={styles.check} onPress={() => navigation.navigate("ChatDetail")}>
+                    <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
                         <Icon name='pencil' size={30} color='#ffffff' />
                     </Button>
                 </View>

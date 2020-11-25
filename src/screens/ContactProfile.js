@@ -28,7 +28,7 @@ const MyProfile = ({route}) => {
                 <Image style={styles.avatar} source={avatar} color="#000000" />
                 <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
                 <Icon style={styles.call} android="call" size={30} color="#ffffff" />
-                <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : detailContact.telphone}</Text>
+                <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : dataContact.telphone}</Text>
                 <Text style={styles.status}>online</Text>
             </View>
             <View style={styles.div}>

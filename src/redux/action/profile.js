@@ -13,5 +13,9 @@ const editBio = (token,Bio) =>({
     type: 'EDIT_BIO',
     payload: http(token).patch('user', qs.stringify({Bio}))
 })
+const editAvatar = (token,data) =>({
+    type: 'EDIT_AVA',
+    payload: http(token).patch('user', data)
+})
 
-export {getMyProfile, editMyName, editBio}
+export {getMyProfile, editMyName, editBio, editAvatar}

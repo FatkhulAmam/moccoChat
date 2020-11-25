@@ -7,6 +7,7 @@ import Icon from 'react-native-ionicons'
 
 import MessageBubble from '../components/bubbleChat'
 import { sendChatAction, getChatDetail } from '../redux/action/chat'
+import {getContactDetail} from '../redux/action/contact'
 
 const ChatDetail = ({ route }) => {
     const navigation = useNavigation()
@@ -15,12 +16,14 @@ const ChatDetail = ({ route }) => {
     const token = useSelector(state => state.auth.token)
     const getChat = useSelector(state => state.getChat)
     const sendChat = useSelector(state => state.sendChat)
+    const dataContact = useSelector(state => state.detailContact.data)
 
     const [recipient, setRecipient] = useState(route.params)
     const [messages, setMessages] = useState('')
 
     useEffect(() => {
         dispatch(getChatDetail(token, route.params))
+        dispatch(getContactDetail(token, route.params))
         console.log(recipient)
     }, [dispatch, token, route.params])
 
@@ -30,7 +33,7 @@ const ChatDetail = ({ route }) => {
 
     return (
         <>
-            <TouchableOpacity onPress={() => navigation.navigate('ContactProfile')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ContactProfile', dataContact.id)}>
                 <Header style={styles.header} transparent>
                     <StatusBar backgroundColor={'#421908'} />
                     <Button transparent onPress={() => navigation.goBack()}>
@@ -38,7 +41,7 @@ const ChatDetail = ({ route }) => {
                     </Button>
                     <Image style={styles.pict} />
                     <View style={styles.identitiy}>
-                        <Text style={styles.name}>NAMA SAYA ADALAH</Text>
+                        <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : dataContact.telphone}</Text>
                         <Text style={styles.status}>Status</Text>
                     </View>
                     <Right />

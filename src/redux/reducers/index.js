@@ -10,6 +10,7 @@ import myProfile from './getMyProfile';
 import editName from './editName'
 import editBio from './editBio'
 import detailContact from './detailContact'
+import avatar from './updateAvatar'
 
 export default combineReducers({
     verification,
@@ -21,5 +22,6 @@ export default combineReducers({
     myProfile,
     editName,
     editBio,
-    detailContact
+    detailContact,
+    avatar
 })
