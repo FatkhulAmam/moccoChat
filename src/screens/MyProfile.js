@@ -66,10 +66,10 @@ const MyProfile = () => {
                     <Text style={styles.text}>{myProfile.data.user_name ? myProfile.data.user_name : 'user name'}</Text>
                     <Text style={styles.tag}>name for your contact</Text>
                 </TouchableOpacity>
-                <View style={styles.border}>
+                <TouchableOpacity style={styles.border} onPress={()=>navigation.navigate('EditBio')}>
                     <Text style={styles.text}>{myProfile.data.bio ? myProfile.data.bio : 'Bio'}</Text>
                     <Text style={styles.tag}>tambahkan beberapa tentang anda</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.btnCheck}>
                 <Button style={styles.check} onPress={takePictures}>

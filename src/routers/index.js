@@ -17,6 +17,7 @@ import ChatDetail from "../screens/ChatDetail"
 import MyProfile from "../screens/MyProfile"
 import ContactProfile from "../screens/ContactProfile"
 import EditName from '../screens/editName'
+import EditBio from '../screens/editBio'
 
 import { verifAction } from '../redux/action/verification';
 
@@ -75,6 +76,7 @@ const Route = () => {
                         <Stack.Screen name='MyProfile' component={MyProfile} options={{ headerShown: false }} />
                         <Stack.Screen name='ContactProfile' component={ContactProfile} options={{ headerShown: false }} />
                         <Stack.Screen name='EditName' component={EditName} options={{ headerShown: false }} />
+                        <Stack.Screen name='EditBio' component={EditBio} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 )}
         </NavigationContainer>

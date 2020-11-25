@@ -26,11 +26,11 @@ const Register = () => {
             <StatusBar backgroundColor={'#421908'} />
             <Container style={styles.parrent}>
                 <Form>
-                    <Item style={styles.name}>
-                        <Input placeholder="user name" value={Phone} onChangeText={Phone => setPhone(Phone)} />
+                    <Item style={styles.bio}>
+                        <Input placeholder="Bio" value={Phone} onChangeText={Phone => setPhone(Phone)} />
                     </Item>
                 </Form>
-                <Text style={styles.textBottom} note>please tell your name </Text>
+                <Text style={styles.textBottom} note>please tell your contact about you, or your activities </Text>
             </Container>
             <View style={styles.btnCheck}>
                 <Button style={styles.check} onPress={InputRegister}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff5e7",
         paddingTop: 25
     },
-    name: {
+    bio: {
         width: 325,
         borderWidth: 1,
         marginTop: 25
