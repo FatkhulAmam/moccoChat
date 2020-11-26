@@ -14,10 +14,11 @@ import avatar from '../assets/images/profile.png'
 const ChatDetail = ({ route }) => {
     const navigation = useNavigation()
     const [Show, setShow] = useState(false)
+    const [chat, setChat] = useState('')
     const dispatch = useDispatch()
     const token = useSelector(state => state.auth.token)
-    const getChat = useSelector(state => state.getChat)
-    const sendChat = useSelector(state => state.sendChat)
+    const {data} = useSelector(state => state.getChat)
+    const sendChat = useSelector(state => state.sendChat.data)
     const dataContact = useSelector(state => state.detailContact.data)
 
     const [recipient, setRecipient] = useState(route.params)
@@ -26,12 +27,27 @@ const ChatDetail = ({ route }) => {
     useEffect(() => {
         dispatch(getChatDetail(token, route.params))
         dispatch(getContactDetail(token, route.params))
-        console.log(sendChat)
-    }, [token, route.params])
+        setChat(data.results)
+    }, [dispatch, token, data, route.params])
 
     const sendMessages = async () => {
         await dispatch(sendChatAction(token, messages, recipient))
     }
+
+
+    const nextPage = async () => {
+        const {nextLink} = data.pageInfo
+        if (nextLink) {
+            const res = axios.get(nextLink)
+            const {results} = res.data
+            const newData = {
+                ...chat,
+                results: [...chat.results, ...results],
+                pageInfo: res.data.pageInfo
+            }
+            setChat(newData)
+        }
+    } 
 
     return (
         <>
@@ -54,9 +70,7 @@ const ChatDetail = ({ route }) => {
             </TouchableOpacity>
             <View style={styles.parrent}>
                 <FlatList
-                    data={
-                        getChat.data
-                    }
+                    data={data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <MessageBubble

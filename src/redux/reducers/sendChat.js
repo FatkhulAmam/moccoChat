@@ -1,7 +1,8 @@
 const initialState = {
     isChat: false,
     isError: false,
-    message: ''
+    message: '',
+    data: ''
 }
 
 export default (state = initialState, action) => {
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
                 isError: false,
                 isLoading:false,
                 isChat: true,
+                data: action.payload.data.data,
                 message: 'send chat success'
             }
         }

@@ -21,7 +21,7 @@ const ChatList = () => {
     const {data} = useSelector(state => state.chatList)
 
     useEffect(() => {
-        consdispatch(getChatList(token))
+        dispatch(getChatList(token))
         setDataNew(data.results)
     }, [dispatch, token, data])
 
