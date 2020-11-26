@@ -4,10 +4,12 @@ import { Container, Button, Card, CardItem, Body, Header, Left, Right, Text, Row
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 import Icon from 'react-native-ionicons'
+import { API_URL } from '@env'
 
 import MessageBubble from '../components/bubbleChat'
 import { sendChatAction, getChatDetail } from '../redux/action/chat'
-import {getContactDetail} from '../redux/action/contact'
+import { getContactDetail } from '../redux/action/contact'
+import avatar from '../assets/images/profile.png'
 
 const ChatDetail = ({ route }) => {
     const navigation = useNavigation()
@@ -39,7 +41,7 @@ const ChatDetail = ({ route }) => {
                     <Button transparent onPress={() => navigation.goBack()}>
                         <Icon name='arrow-back' size={30} color="#ffffff" />
                     </Button>
-                    <Image style={styles.pict} />
+                    <Image style={styles.avatar} source={dataContact.photo ? { uri: `${API_URL}${dataContact.photo}` } : avatar} color="#000000" />
                     <View style={styles.identitiy}>
                         <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : dataContact.telphone}</Text>
                         <Text style={styles.status}>Status</Text>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         marginLeft: 25
     },
-    pict: {
+    avatar: {
         width: 50,
         height: 50,
         backgroundColor: '#e8e8e8',

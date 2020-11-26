@@ -4,6 +4,7 @@ import { Button, Text } from 'native-base';
 import Icon from 'react-native-ionicons'
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
+import { API_URL } from '@env'
 
 import avatar from '../assets/images/profile.png'
 import {getContactDetail} from '../redux/action/contact'
@@ -25,7 +26,7 @@ const MyProfile = ({route}) => {
         <>
             <StatusBar translucent backgroundColor="transparent" />
             <View>
-                <Image style={styles.avatar} source={avatar} color="#000000" />
+                <Image style={styles.avatar} source={dataContact.photo ? {uri : `${API_URL}${dataContact.photo}`} : avatar} color="#000000" />
                 <Icon style={styles.back} android="arrow-back" size={35} color="#ffffff" />
                 <Icon style={styles.call} android="call" size={30} color="#ffffff" />
                 <Text style={styles.name}>{dataContact.user_name ? dataContact.user_name : dataContact.telphone}</Text>

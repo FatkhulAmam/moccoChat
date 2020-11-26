@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
 import { getChatList } from '../redux/action/chat'
 import ListChat from '../components/ListChat'
+import avatar from '../assets/images/profile.png'
 
 const ChatList = () => {
     const [dataNew, setDataNew] = useState('')
@@ -61,7 +62,7 @@ const ChatList = () => {
                             name={item.recipientDetail.user_name ? item.recipientDetail.user_name : item.recipientDetail.telphone}
                             lastMessage={item.message}
                             time={moment(item.createdAt).format("LT")}
-                            avatar={{uri: `${API_URL}${item.recipientDetail.photo}`}}
+                            avatar={item.recipientDetail.photo ? {uri: `${API_URL}${item.recipientDetail.photo}`} : avatar}
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
                             onEndReached = {nextPage}
@@ -73,7 +74,7 @@ const ChatList = () => {
                                 time={item.createdAt}
                                 lastMessage={item.message}
                                 time={moment(item.createdAt).format("LT")}
-                                avatar={{uri: `${API_URL}${item.recipientDetail.photo}`}}
+                                avatar={item.recipientDetail.photo ? {uri: `${API_URL}${item.senderDetail.photo}`} : avatar}
                                 movePageChat={() => navigation.navigate("ChatDetail", item.senderDetail.id)}
                                 moveDetailContact={() => navigation.navigate("ContactProfile", item.senderDetail.id)}
                                 onEndReached = {nextPage}
