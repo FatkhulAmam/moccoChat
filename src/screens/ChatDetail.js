@@ -26,8 +26,8 @@ const ChatDetail = ({ route }) => {
     useEffect(() => {
         dispatch(getChatDetail(token, route.params))
         dispatch(getContactDetail(token, route.params))
-        console.log(recipient)
-    }, [dispatch, token, route.params])
+        console.log(sendChat)
+    }, [token, route.params])
 
     const sendMessages = async () => {
         await dispatch(sendChatAction(token, messages, recipient))
@@ -54,7 +54,9 @@ const ChatDetail = ({ route }) => {
             </TouchableOpacity>
             <View style={styles.parrent}>
                 <FlatList
-                    data={getChat.data}
+                    data={
+                        getChat.data
+                    }
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <MessageBubble
@@ -62,6 +64,7 @@ const ChatDetail = ({ route }) => {
                             text={item.message}
                         />
                     )}
+                    inverted
                 />
             </View>
             <Card style={styles.inputChat} transparent>

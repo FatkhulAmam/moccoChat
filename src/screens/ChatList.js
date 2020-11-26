@@ -21,7 +21,7 @@ const ChatList = () => {
     const {data} = useSelector(state => state.chatList)
 
     useEffect(() => {
-        console.log(dispatch(getChatList(token)));
+        consdispatch(getChatList(token))
         setDataNew(data.results)
     }, [dispatch, token, data])
 
@@ -57,7 +57,7 @@ const ChatList = () => {
                     data={dataNew}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
-                        profileId !== item.recipientDetail.id ? (
+                        profileId !== item.recipient ? (
                         <ListChat
                             name={item.recipientDetail.user_name ? item.recipientDetail.user_name : item.recipientDetail.telphone}
                             lastMessage={item.message}
@@ -84,7 +84,7 @@ const ChatList = () => {
                     )}
                 />
                 <View style={styles.btnCheck}>
-                    <Button style={styles.check} onPress={() => navigation.navigate("LandingPage")}>
+                    <Button style={styles.check} onPress={() => navigation.navigate("Contact")}>
                         <Icon name='pencil' size={30} color='#ffffff' />
                     </Button>
                 </View>
