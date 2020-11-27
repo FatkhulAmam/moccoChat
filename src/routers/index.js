@@ -29,14 +29,11 @@ import Landing from '../screens/LandingPage';
 
 
 const DrawerNavigator = () => {
-    const haveChat = useSelector(state => state.chatList.chatList)
+    const haveChat = useSelector(state => state.chatList.data.results)
     return (
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-            {!haveChat ? (
-                <Drawer.Screen name="Home" component={LandingPage} />
-            ) : (
-                    <Drawer.Screen name="Chat" component={ChatList} />
-                )}
+            <Drawer.Screen name="Home" component={LandingPage} />
+            <Drawer.Screen name="Chat" component={ChatList} />
         </Drawer.Navigator>
     );
 }
@@ -44,9 +41,6 @@ const DrawerNavigator = () => {
 const Route = () => {
     const isRegister = useSelector(state => state.auth.isRegistry)
     const haveChat = useSelector(state => state.chatList.chatList)
-    useEffect(() => {
-        console.log(haveChat);
-    })
 
     return (
         <NavigationContainer>
@@ -71,20 +65,15 @@ const Route = () => {
                 </Stack.Navigator>
             ) : (
                     <Stack.Navigator>
-                        {!haveChat ? (
-                            <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
-                        ) : (
-                                <>
-                                    <Stack.Screen name="ChatList" component={DrawerNavigator} options={{ headerShown: false }} />
-                                    <Stack.Screen name='ChatDetail' component={ChatDetail} options={{ headerShown: false }} />
-                                    <Stack.Screen name='MyProfile' component={MyProfile} options={{ headerShown: false }} />
-                                    <Stack.Screen name='ContactProfile' component={ContactProfile} options={{ headerShown: false }} />
-                                    <Stack.Screen name='EditName' component={EditName} options={{ headerShown: false }} />
-                                    <Stack.Screen name='EditBio' component={EditBio} options={{ headerShown: false }} />
-                                    <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
-                                    <Stack.Screen name='Contact' component={Contact} options={{ headerShown: false }} />
-                                </>
-                            )}
+                        <Stack.Screen name="LandingPage" component={DrawerNavigator} options={{ headerShown: false }} />
+                        <Stack.Screen name="ChatList" component={DrawerNavigator} options={{ headerShown: false }} />
+                        <Stack.Screen name='ChatDetail' component={ChatDetail} options={{ headerShown: false }} />
+                        <Stack.Screen name='MyProfile' component={MyProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name='ContactProfile' component={ContactProfile} options={{ headerShown: false }} />
+                        <Stack.Screen name='EditName' component={EditName} options={{ headerShown: false }} />
+                        <Stack.Screen name='EditBio' component={EditBio} options={{ headerShown: false }} />
+                        <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
+                        <Stack.Screen name='Contact' component={Contact} options={{ headerShown: false }} />
                     </Stack.Navigator>
                 )}
         </NavigationContainer>

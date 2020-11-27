@@ -54,7 +54,7 @@ const ChatDetail = ({ route }) => {
             <TouchableOpacity onPress={() => navigation.navigate('ContactProfile', dataContact.id)}>
                 <Header style={styles.header} transparent>
                     <StatusBar backgroundColor={'#421908'} />
-                    <Button transparent onPress={() => navigation.goBack()}>
+                    <Button transparent onPress={() => navigation.navigate('Chat')}>
                         <Icon name='arrow-back' size={30} color="#ffffff" />
                     </Button>
                     <Image style={styles.avatar} source={dataContact.photo ? { uri: `${API_URL}${dataContact.photo}` } : avatar} color="#000000" />

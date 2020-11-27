@@ -23,7 +23,7 @@ export function DrawerContent(props) {
         <View style={{ flex: 1, backgroundColor: '#fff5e7', marginTop: -5 }}>
             <DrawerContentScrollView {...props} >
                 <TouchableOpacity style={styles.headDrawer} onPress={() => navigation.navigate('MyProfile')}>
-                    <Image source={{uri: `${API_URL}${myProfile.data.photo}`}} style={styles.ava} />
+                    <Image source={myProfile.data.photo ? {uri: `${API_URL}${myProfile.data.photo}`} : avatar} style={styles.ava} />
                     <View >
                         <Text style={styles.name}>{myProfile.data.user_name}</Text>
                         <Text style={styles.number}>{myProfile.data.telphone}</Text>

@@ -4,6 +4,8 @@ import { Container, Button, Card, CardItem, Body, Header, Title, Right, Text, Le
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { API_URL } from '@env'
 import moment from 'moment'
+import socket from '../helpers/socket'
+import http from '../helpers/http'
 
 import { useNavigation } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,18 +25,25 @@ const ChatList = () => {
     useEffect(() => {
         dispatch(getChatList(token))
         setDataNew(data.results)
+        socket.on(token, () => {
+            getChatList('FALLBACK')
+        })
+        return () => {
+            socket.close()
+        }
     }, [dispatch, token, data])
 
     const nextPage = async () => {
         const {nextLink} = data.pageInfo
         if (nextLink) {
-            const res = axios.get(nextLink)
+            const res = await http(token).get('chat?page=2')
             const {results} = res.data
             const newData = {
                 ...dataNew,
                 results: [...dataNew.results, ...results],
                 pageInfo: res.data.pageInfo
             }
+            console.log(newData);
             setDataNew(newData)
         }
     } 
@@ -65,8 +74,6 @@ const ChatList = () => {
                             avatar={item.recipientDetail.photo ? {uri: `${API_URL}${item.recipientDetail.photo}`} : avatar}
                             movePageChat={() => navigation.navigate("ChatDetail", item.recipientDetail.id)}
                             moveDetailContact={() => navigation.navigate("ContactProfile", item.recipientDetail.id)}
-                            onEndReached = {nextPage}
-                            onEndReachedThreshold = {0.5}
                         />
                         ) : (
                             <ListChat
@@ -74,14 +81,14 @@ const ChatList = () => {
                                 time={item.createdAt}
                                 lastMessage={item.message}
                                 time={moment(item.createdAt).format("LT")}
-                                avatar={item.recipientDetail.photo ? {uri: `${API_URL}${item.senderDetail.photo}`} : avatar}
+                                avatar={item.senderDetail.photo ? {uri: `${API_URL}${item.senderDetail.photo}`} : avatar}
                                 movePageChat={() => navigation.navigate("ChatDetail", item.senderDetail.id)}
                                 moveDetailContact={() => navigation.navigate("ContactProfile", item.senderDetail.id)}
-                                onEndReached = {nextPage}
-                                onEndReachedThreshold = {0.5}
                             />
                         )
                     )}
+                    onEndReached = {nextPage}
+                    onEndReachedThreshold = {0.5}
                 />
                 <View style={styles.btnCheck}>
                     <Button style={styles.check} onPress={() => navigation.navigate("Contact")}>

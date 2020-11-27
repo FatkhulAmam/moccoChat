@@ -7,14 +7,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { API_URL } from '@env'
 
 import { getContactAction } from '../redux/action/contact';
+import avatar from '../assets/images/profile.png'
 
 class Item extends React.Component {
     render() {
         return (
             <TouchableOpacity onPress={this.props.movePage}>
                 <StatusBar backgroundColor={'#421908'} />
-                <View style={styles.renderParent} source={this.props.avatar}>
-                    <Image style={styles.pict} />
+                <View style={styles.renderParent}>
+                    <Image style={styles.pict} source={this.props.avatar} />
                     <View>
                         <Text style={styles.name}>{this.props.name}</Text>
                         <Text style={styles.status}>{this.props.phone}</Text>
@@ -65,13 +66,13 @@ const Landing = () => {
                         <Item
                             name={(item.user_name ? item.user_name : item.telphone)}
                             phone={item.telphone}
-                            avatar={{uri: `${API_URL}${item.photo}`}}
+                            avatar={item.photo ? {uri: `${API_URL}${item.photo}`} : avatar}
                             movePage={() => navigation.navigate("ChatDetail", item.id)}
                         />
                     )}
                 />
                 <View style={styles.btnCheck}>
-                    <Button style={styles.check} >
+                    <Button style={styles.check} onPress={() => navigation.navigate("Contact")}>
                         <Icon name='pencil' size={30} color='#ffffff' />
                     </Button>
                 </View>
