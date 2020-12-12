@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -22,13 +22,9 @@ import SetName from '../screens/SetName';
 import Search from '../screens/Search';
 import Contact from '../screens/Contact';
 
-import {verifAction} from '../redux/action/verification';
-
 import {DrawerContent} from '../components/DrawerStyles';
-import Landing from '../screens/LandingPage';
 
 const DrawerNavigator = () => {
-  const haveChat = useSelector((state) => state.chatList.data.results);
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Home" component={LandingPage} />
@@ -39,7 +35,6 @@ const DrawerNavigator = () => {
 
 const Route = () => {
   const isRegister = useSelector((state) => state.auth.isRegistry);
-  const haveChat = useSelector((state) => state.chatList.chatList);
 
   return (
     <NavigationContainer>

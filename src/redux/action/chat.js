@@ -1,19 +1,19 @@
-import http from '../../helpers/http'
-import qs from 'qs'
+import http from '../../helpers/http';
+import qs from 'qs';
 
 const getChatList = (token) => ({
-    type: 'CHAT_LIST',
-    payload: http(token).get('chat')
-})
+  type: 'CHAT_LIST',
+  payload: http(token).get('chat'),
+});
 
 const sendChatAction = (token, messages, recipient) => ({
-    type: 'SEND_CHAT',
-    payload: http(token).post('chat', qs.stringify({messages, recipient}))
-})
+  type: 'SEND_CHAT',
+  payload: http(token).post('chat', qs.stringify({messages, recipient})),
+});
 
 const getChatDetail = (token, recipients) => ({
-    type: 'GET_CHAT',
-    payload: http(token).get(`chat/detail/${recipients}`)
-})
+  type: 'GET_CHAT',
+  payload: http(token).get(`chat/detail/${recipients}`),
+});
 
-export {getChatList ,sendChatAction, getChatDetail}
+export {getChatList, sendChatAction, getChatDetail};
