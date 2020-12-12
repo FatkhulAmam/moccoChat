@@ -24,7 +24,7 @@ const ChatDetail = ({route}) => {
   const [chat, setChat] = useState('');
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const {data} = useSelector((state) => state.getChat);
+  const {dataDetail} = useSelector((state) => state.chat);
   const sendChat = useSelector((state) => state.sendChat.data);
   const dataContact = useSelector((state) => state.detailContact.data);
 
@@ -34,8 +34,8 @@ const ChatDetail = ({route}) => {
   useEffect(() => {
     dispatch(getChatDetail(token, route.params));
     dispatch(getContactDetail(token, route.params));
-    setChat(data.results);
-  }, [dispatch, token, data, route.params]);
+    setChat(dataDetail.results);
+  }, [dispatch, token, dataDetail, route.params]);
 
   const sendMessages = async () => {
     await dispatch(sendChatAction(token, messages, recipient));
@@ -89,7 +89,7 @@ const ChatDetail = ({route}) => {
       </TouchableOpacity>
       <View style={styles.parrent}>
         <FlatList
-          data={data}
+          data={dataDetail}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) => (
             <MessageBubble

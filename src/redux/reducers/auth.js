@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
         ...state,
         isError: true,
         isLoading: false,
-        message: 'make account denied',
+        message: 'register denied',
       };
     }
     case 'MAKE_ACCOUNT_FULFILLED': {
