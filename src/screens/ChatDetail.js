@@ -25,7 +25,6 @@ const ChatDetail = ({route}) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const {dataDetail} = useSelector((state) => state.chat);
-  const sendChat = useSelector((state) => state.sendChat.data);
   const dataContact = useSelector((state) => state.detailContact.data);
 
   const [recipient, setRecipient] = useState(route.params);

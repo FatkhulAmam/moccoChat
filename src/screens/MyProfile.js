@@ -6,6 +6,7 @@ import {
   StatusBar,
   Switch,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import {Button, Text} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
@@ -21,6 +22,22 @@ const options = {
   title: 'my picture',
   takePhotoButtonTitle: 'Take Photo',
   chooseFromLibraryButtonTitle: 'Choose Photo',
+};
+
+const showToastImg = () => {
+  ToastAndroid.showWithGravity(
+    'Not an image (jpg/jpeg/png)',
+    ToastAndroid.LONG,
+    ToastAndroid.CENTER,
+  );
+};
+
+const showToastSize = () => {
+  ToastAndroid.showWithGravity(
+    'image to large(under 500kb)',
+    ToastAndroid.LONG,
+    ToastAndroid.CENTER,
+  );
 };
 
 const MyProfile = () => {
@@ -46,15 +63,27 @@ const MyProfile = () => {
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        setAvatarSource(response.uri);
-        const form = new FormData();
-        form.append('pictures', {
-          uri: response.uri,
-          name: response.fileName,
-          type: response.type,
-        });
-        console.log(form);
-        dispatch(editAvatar(token, form));
+        if (response.fileSize <= 500 * 500) {
+          if (
+            `${response.type}` === 'image/jpg' ||
+            'image/jpeg' ||
+            'image/png'
+          ) {
+            setAvatarSource(response.uri);
+            const form = new FormData();
+            form.append('pictures', {
+              uri: response.uri,
+              name: response.fileName,
+              type: response.type,
+            });
+            console.log(form);
+            dispatch(editAvatar(token, form));
+          } else {
+            showToastImg();
+          }
+        } else {
+          showToastSize();
+        }
       }
     });
   };
