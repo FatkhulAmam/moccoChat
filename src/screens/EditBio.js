@@ -10,7 +10,8 @@ import {editBio} from '../redux/action/profile';
 const AddBio = () => {
   const navigation = useNavigation();
   const token = useSelector((state) => state.auth.token);
-  const [Bio, setBio] = useState('');
+  const profile = useSelector((state) => state.profile.data);
+  const [Bio, setBio] = useState(profile.bio);
   const dispatch = useDispatch();
 
   useEffect(() => {

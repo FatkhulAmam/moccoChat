@@ -10,12 +10,9 @@ import {editMyName} from '../redux/action/profile';
 const ChangeName = () => {
   const navigation = useNavigation();
   const token = useSelector((state) => state.auth.token);
-  const [user_name, setName] = useState('');
+  const profile = useSelector((state) => state.profile.data);
+  const [user_name, setName] = useState(profile.user_name);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(user_name);
-  });
 
   const InputName = async () => {
     await dispatch(editMyName(token, user_name));
