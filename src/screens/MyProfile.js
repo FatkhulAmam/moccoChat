@@ -34,7 +34,15 @@ const showToastImg = () => {
 
 const showToastSize = () => {
   ToastAndroid.showWithGravity(
-    'image to large(under 500kb)',
+    'image to large(under 1 mb)',
+    ToastAndroid.LONG,
+    ToastAndroid.CENTER,
+  );
+};
+
+const setImageFullfilled = () => {
+  ToastAndroid.showWithGravity(
+    'updated!!!',
     ToastAndroid.LONG,
     ToastAndroid.CENTER,
   );
@@ -45,9 +53,9 @@ const MyProfile = () => {
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const myProfile = useSelector((state) => state.myProfile);
+  const myProfile = useSelector((state) => state.profile.data);
   const [AvatarSource, setAvatarSource] = useState(
-    `${API_URL}${myProfile.data.photo}`,
+    myProfile.photo ? {uri: `${API_URL}${myProfile.photo}`} : avatar,
   );
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
@@ -56,28 +64,27 @@ const MyProfile = () => {
 
   const takePictures = () => {
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else {
-        if (response.fileSize <= 500 * 500) {
+        if (response.fileSize <= 1024 * 1024) {
           if (
             `${response.type}` === 'image/jpg' ||
             'image/jpeg' ||
             'image/png'
           ) {
-            setAvatarSource(response.uri);
+            setAvatarSource({uri: response.uri});
             const form = new FormData();
             form.append('pictures', {
               uri: response.uri,
               name: response.fileName,
               type: response.type,
             });
-            console.log(form);
             dispatch(editAvatar(token, form));
+            setImageFullfilled();
+            return dispatch(getMyProfile(token));
           } else {
             showToastImg();
           }
@@ -92,11 +99,7 @@ const MyProfile = () => {
     <>
       <StatusBar translucent backgroundColor="transparent" />
       <View>
-        <Image
-          style={styles.avatar}
-          source={{uri: AvatarSource}}
-          color="#000000"
-        />
+        <Image style={styles.avatar} source={AvatarSource} />
         <Icon
           style={styles.back}
           android="arrow-back"
@@ -105,23 +108,21 @@ const MyProfile = () => {
         />
         <Icon style={styles.call} android="more" size={35} color="#ffffff" />
         <Text style={styles.name}>
-          {myProfile.data.user_name
-            ? myProfile.data.user_name
-            : myProfile.data.telphone}
+          {myProfile.user_name ? myProfile.user_name : myProfile.telphone}
         </Text>
         <Text style={styles.status}>online</Text>
       </View>
       <View style={styles.div}>
         <Text style={styles.info}>Akun</Text>
         <View style={styles.border}>
-          <Text style={styles.text}>{myProfile.data.telphone}</Text>
+          <Text style={styles.text}>{myProfile.telphone}</Text>
           <Text style={styles.tag}>Phone</Text>
         </View>
         <TouchableOpacity
           style={styles.border}
           onPress={() => navigation.navigate('EditName')}>
           <Text style={styles.text}>
-            {myProfile.data.user_name ? myProfile.data.user_name : 'user name'}
+            {myProfile.user_name ? myProfile.user_name : 'user name'}
           </Text>
           <Text style={styles.tag}>name for your contact</Text>
         </TouchableOpacity>
@@ -129,7 +130,7 @@ const MyProfile = () => {
           style={styles.border}
           onPress={() => navigation.navigate('EditBio')}>
           <Text style={styles.text}>
-            {myProfile.data.bio ? myProfile.data.bio : 'Bio'}
+            {myProfile.bio ? myProfile.bio : 'Bio'}
           </Text>
           <Text style={styles.tag}>tambahkan beberapa tentang anda</Text>
         </TouchableOpacity>
@@ -147,7 +148,7 @@ export default MyProfile;
 
 const styles = StyleSheet.create({
   avatar: {
-    width: 360,
+    width: 'auto',
     height: 360,
   },
   back: {

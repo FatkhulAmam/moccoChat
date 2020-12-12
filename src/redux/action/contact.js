@@ -15,4 +15,8 @@ const searchContact = (token, searchValue) => ({
   payload: http(token).get(`user?search[user_name]=${searchValue}`),
 });
 
-export {getContactAction, getContactDetail, searchContact};
+const destroyContact = () => ({
+  type: 'DESTROY',
+});
+
+export {getContactAction, getContactDetail, searchContact, destroyContact};

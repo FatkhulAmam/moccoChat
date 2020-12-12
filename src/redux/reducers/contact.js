@@ -29,6 +29,9 @@ export default (state = initialState, action) => {
         data: action.payload.data.result,
       };
     }
+    case 'DESTROY': {
+      return initialState;
+    }
     default: {
       return state;
     }

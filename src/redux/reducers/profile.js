@@ -92,6 +92,9 @@ export default (state = initialState, action) => {
         message: 'cannot edit bio',
       };
     }
+    case 'DESTROY': {
+      return initialState;
+    }
     case 'EDIT_BIO_FULFILLED': {
       return {
         ...state,

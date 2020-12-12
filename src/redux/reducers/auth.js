@@ -33,11 +33,7 @@ export default (state = initialState, action) => {
       };
     }
     case 'LOGOUT': {
-      return {
-        ...state,
-        isRegistry: false,
-        token: '',
-      };
+      return initialState;
     }
     default: {
       return state;

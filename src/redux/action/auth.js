@@ -6,4 +6,8 @@ const makeAccount = (phone) => ({
   payload: http().post('auth', qs.stringify({phone})),
 });
 
-export {makeAccount};
+const logout = () => ({
+  type: 'LOGOUT',
+});
+
+export {makeAccount, logout};

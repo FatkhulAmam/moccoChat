@@ -23,6 +23,9 @@ export default (state = initialState, action) => {
         message: 'LOGOUT Succefully',
       };
     }
+    case 'DESTROY': {
+      return initialState;
+    }
     default: {
       return state;
     }

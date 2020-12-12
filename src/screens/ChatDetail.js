@@ -33,8 +33,7 @@ const ChatDetail = ({route}) => {
   useEffect(() => {
     dispatch(getChatDetail(token, route.params));
     dispatch(getContactDetail(token, route.params));
-    setChat(dataDetail.results);
-  }, [dispatch, token, dataDetail, route.params]);
+  }, [dispatch, token, route.params]);
 
   const sendMessages = async () => {
     await dispatch(sendChatAction(token, messages, recipient));

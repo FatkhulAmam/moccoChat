@@ -37,34 +37,33 @@ const ChatList = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const profileId = useSelector((state) => state.myProfile.data.id);
-  const {data} = useSelector((state) => state.chatList);
+  const profileId = useSelector((state) => state.profile.data.id);
+  const {dataList} = useSelector((state) => state.chat);
 
   useEffect(() => {
     dispatch(getChatList(token));
-    setDataNew(data.results);
     socket.on(token, () => {
       getChatList('FALLBACK');
     });
     return () => {
       socket.close();
     };
-  }, [dispatch, token, data]);
+  }, [dispatch, token]);
 
-  const nextPage = async () => {
-    const {nextLink} = data.pageInfo;
-    if (nextLink) {
-      const res = await http(token).get('chat?page=2');
-      const {results} = res.data;
-      const newData = {
-        ...dataNew,
-        results: [...dataNew.results, ...results],
-        pageInfo: res.data.pageInfo,
-      };
-      console.log(newData);
-      setDataNew(newData);
-    }
-  };
+  // const nextPage = async () => {
+  //   const {nextLink} = data.pageInfo;
+  //   if (nextLink) {
+  //     const res = await http(token).get('chat?page=2');
+  //     const {results} = res.data;
+  //     const newData = {
+  //       ...dataNew,
+  //       results: [...dataNew.results, ...results],
+  //       pageInfo: res.data.pageInfo,
+  //     };
+  //     console.log(newData);
+  //     setDataNew(newData);
+  //   }
+  // };
 
   return (
     <>
@@ -81,7 +80,7 @@ const ChatList = () => {
       </Header>
       <Container style={styles.parrent}>
         <FlatList
-          data={dataNew}
+          data={dataList.results}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) =>
             profileId !== item.recipient ? (
@@ -128,8 +127,8 @@ const ChatList = () => {
               />
             )
           }
-          onEndReached={nextPage}
-          onEndReachedThreshold={0.5}
+          // onEndReached={nextPage}
+          // onEndReachedThreshold={0.5}
         />
         <View style={styles.btnCheck}>
           <Button

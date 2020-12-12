@@ -18,4 +18,8 @@ const editAvatar = (token, data) => ({
   payload: http(token).patch('user', data),
 });
 
-export {getMyProfile, editMyName, editBio, editAvatar};
+const destroyProfile = () => ({
+  type: 'DESTROY',
+});
+
+export {getMyProfile, editMyName, editBio, editAvatar, destroyProfile};

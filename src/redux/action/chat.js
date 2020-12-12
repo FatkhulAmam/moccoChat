@@ -16,4 +16,8 @@ const getChatDetail = (token, recipients) => ({
   payload: http(token).get(`chat/detail/${recipients}`),
 });
 
-export {getChatList, sendChatAction, getChatDetail};
+const destroyChat = () => ({
+  type: 'DESTROY',
+});
+
+export {getChatList, sendChatAction, getChatDetail, destroyChat};

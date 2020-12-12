@@ -9,6 +9,10 @@ import {API_URL} from '@env';
 
 import avatar from '../assets/images/profile.png';
 import {getMyProfile} from '../redux/action/profile';
+import {logout} from '../redux/action/auth';
+import {destroyChat} from '../redux/action/chat';
+import {destroyProfile} from '../redux/action/profile';
+import {destroyContact} from '../redux/action/contact';
 
 export function DrawerContent(props) {
   const navigation = useNavigation();
@@ -18,6 +22,13 @@ export function DrawerContent(props) {
   useEffect(() => {
     dispatch(getMyProfile(token));
   }, [dispatch, token]);
+
+  const logoutPres = () => {
+    dispatch(logout());
+    dispatch(destroyChat());
+    dispatch(destroyProfile());
+    dispatch(destroyContact());
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff5e7', marginTop: -5}}>
@@ -53,9 +64,7 @@ export function DrawerContent(props) {
           </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
-      <TouchableOpacity
-        style={styles.bottomDrawer}
-        onPress={() => dispatch({type: 'LOGOUT'})}>
+      <TouchableOpacity style={styles.bottomDrawer} onPress={logoutPres}>
         <Text style={styles.sign}>Sign out</Text>
         <Icon name="log-out" size={25} />
       </TouchableOpacity>

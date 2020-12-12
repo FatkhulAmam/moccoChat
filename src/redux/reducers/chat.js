@@ -81,6 +81,9 @@ export default (state = initialState, action) => {
         message: 'send chat success',
       };
     }
+    case 'DESTROY': {
+      return initialState;
+    }
     default: {
       return state;
     }
