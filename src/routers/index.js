@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 //import screens
 import Intro from '../screens/Intro';
 import Register from '../screens/Register';
-import Verification from '../screens/Verification';
+// import Verification from '../screens/Verification';
 import LandingPage from '../screens/LandingPage';
 import ChatList from '../screens/ChatList';
 import ChatDetail from '../screens/ChatDetail';
@@ -25,16 +25,21 @@ import Contact from '../screens/Contact';
 import {DrawerContent} from '../components/DrawerStyles';
 
 const DrawerNavigator = () => {
+  const haveChat = useSelector((state) => state.chat.dataList.results);
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={LandingPage} />
-      <Drawer.Screen name="Chat" component={ChatList} />
+      {haveChat === [] ? (
+        <Drawer.Screen name="Home" component={LandingPage} />
+      ) : (
+        <Drawer.Screen name="Chat" component={ChatList} />
+      )}
     </Drawer.Navigator>
   );
 };
 
 const Route = () => {
   const isRegister = useSelector((state) => state.auth.isRegistry);
+  const haveName = useSelector((state) => state.profile.data.user_name);
 
   return (
     <NavigationContainer>
@@ -60,11 +65,22 @@ const Route = () => {
             }}
           />
           {/* stack verif screen */}
-          <Stack.Screen
-            name="SetName"
-            component={SetName}
-            options={{headerShown: false}}
-          />
+        </Stack.Navigator>
+      ) : haveName === null ? (
+        <Stack.Navigator>
+          {haveName === null ? (
+            <Stack.Screen
+              name="SetName"
+              component={SetName}
+              options={{headerShown: false}}
+            />
+          ) : (
+            <Stack.Screen
+              name="LandingPage"
+              component={DrawerNavigator}
+              options={{headerShown: false}}
+            />
+          )}
         </Stack.Navigator>
       ) : (
         <Stack.Navigator>
