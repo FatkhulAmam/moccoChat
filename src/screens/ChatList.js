@@ -22,6 +22,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {API_URL} from '@env';
 import moment from 'moment';
+import PushNotification from 'react-native-push-notification';
 import socket from '../helpers/socket';
 import http from '../helpers/http';
 
@@ -30,6 +31,18 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getChatList} from '../redux/action/chat';
 import ListChat from '../components/ListChat';
 import avatar from '../assets/images/profile.png';
+
+PushNotification.createChannel(
+  {
+    channelId: 'notif',
+    channelName: 'Notif channel',
+    channelDescription: 'A channel to welcoming Mocco notif',
+    soundName: 'default',
+    importance: 4,
+    vibrate: true,
+  },
+  (created) => console.log(`createChannel returned '${created}'`),
+);
 
 const ChatList = () => {
   const [dataNew, setDataNew] = useState('');
@@ -42,6 +55,11 @@ const ChatList = () => {
 
   useEffect(() => {
     dispatch(getChatList(token));
+    PushNotification.localNotification({
+      channelId: 'notif',
+      tittle: 'Mocco Chat',
+      message: 'Welcome Mocco Chat!!',
+    });
     socket.on(token, () => {
       getChatList('FALLBACK');
     });
