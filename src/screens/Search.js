@@ -8,7 +8,7 @@ import {
   StatusBar,
   TextInput,
 } from 'react-native';
-import {Container, Button, Header, Body, Right, Text} from 'native-base';
+import {Container, Button, Header, Body, Text} from 'native-base';
 import Icon from 'react-native-ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -37,8 +37,8 @@ const Landing = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const verification = useSelector((state) => state.vericication);
-  const contactData = useSelector((state) => state.contact);
+  // const verification = useSelector((state) => state.vericication);
+  // const contactData = useSelector((state) => state.contact);
   const searchResult = useSelector((state) => state.search);
   const [searchValues, setSearchValues] = useState('');
 
@@ -58,11 +58,11 @@ const Landing = () => {
           <Icon name="arrow-back" size={30} color="#ffffff" />
         </Button>
         <Body>
-          <View style={{position: 'relative'}}>
+          <View style={styles.searchContainer}>
             <TextInput
               style={styles.search}
               placeholder="Search"
-              onChangeText={(searchValues) => setSearchValues(searchValues)}
+              onChangeText={() => setSearchValues(searchValues)}
             />
             <TouchableOpacity style={styles.icon} onPress={submitSearch}>
               <Icon name="search" size={30} color="#ffffff" />
@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
   kontakData: {
     backgroundColor: '#fff5e7',
     paddingLeft: 15,
+  },
+  searchContainer: {
+    position: 'relative',
   },
   renderParent: {
     flexDirection: 'row',

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,17 +7,7 @@ import {
   Image,
   StatusBar,
 } from 'react-native';
-import {
-  Container,
-  Button,
-  Card,
-  CardItem,
-  Body,
-  Header,
-  Title,
-  Right,
-  Text,
-} from 'native-base';
+import {Container, Button, Header, Title, Right, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -30,7 +20,6 @@ class Item extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={this.props.movePage}>
-        <StatusBar backgroundColor={'#421908'} />
         <View style={styles.renderParent}>
           <Image style={styles.pict} source={this.props.avatar} />
           <View>
@@ -47,7 +36,7 @@ const ContactScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const verification = useSelector((state) => state.vericication);
+  // const verification = useSelector((state) => state.vericication);
   const contactData = useSelector((state) => state.contact);
 
   useEffect(() => {
@@ -58,6 +47,7 @@ const ContactScreen = () => {
   return (
     <>
       <Header style={styles.header} transparent>
+        <StatusBar backgroundColor={'#421908'} />
         <Icon
           name="bars"
           size={22}
@@ -66,7 +56,7 @@ const ContactScreen = () => {
         />
         <Title style={styles.title}>Mocco Chat</Title>
         <Right />
-        <Button transparent onPress={() => navigation.navigate('')}>
+        <Button transparent onPress={() => navigation.navigate('Search')}>
           <Icon name="search" size={22} color="#ffffff" />
         </Button>
       </Header>

@@ -15,7 +15,7 @@ import Icon from 'react-native-ionicons';
 import {API_URL} from '@env';
 
 import MessageBubble from '../components/bubbleChat';
-import {sendChatAction, getChatDetail} from '../redux/action/chat';
+import {sendChatAction, getChatDetail, destroyChat} from '../redux/action/chat';
 import {getContactDetail} from '../redux/action/contact';
 import avatar from '../assets/images/profile.png';
 
@@ -37,6 +37,8 @@ const ChatDetail = ({route}) => {
 
   const sendMessages = async () => {
     await dispatch(sendChatAction(token, messages, recipient));
+    // await dispatch(destroyChat());
+    return dispatch(getChatDetail(token, route.params));
   };
 
   // const nextPage = async () => {
@@ -77,7 +79,7 @@ const ChatDetail = ({route}) => {
                 ? dataContact.user_name
                 : dataContact.telphone}
             </Text>
-            <Text style={styles.status}>Status</Text>
+            <Text style={styles.status}>Online</Text>
           </View>
           <Right />
           <Button transparent onPress={() => navigation.navigate('')}>
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   status: {
-    color: '#ffffff',
+    color: '#fff5e7',
   },
   inputChat: {
     flexDirection: 'row',
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
     padding: 10,
     bottom: -4,
     height: 50,
-    width: 359,
+    width: '100%',
     backgroundColor: '#ecccb4',
     borderRadius: 25,
   },

@@ -1,21 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  TextInput,
-  StatusBar,
-} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, TextInput, StatusBar} from 'react-native';
 import {Container, Button, Text, Form, Header, Title, Right} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import {verifAction} from '../redux/action/verification';
 
 const Register = () => {
   const navigation = useNavigation();
-  const verification = useSelector((state) => state.verification);
+  // const verification = useSelector((state) => state.verification);
   const dispatch = useDispatch();
   const [CodeOne, setCode] = useState('');
   const [CodeTwo, setCodeTwo] = useState('');
@@ -48,25 +42,25 @@ const Register = () => {
             name="code"
             value={CodeOne}
             style={styles.txtInput}
-            onChangeText={(CodeOne) => setCode(CodeOne)}
+            onChangeText={() => setCode(CodeOne)}
           />
           <TextInput
             name="code"
             value={CodeTwo}
             style={styles.txtInput}
-            onChangeText={(CodeTwo) => setCodeTwo(CodeTwo)}
+            onChangeText={() => setCodeTwo(CodeTwo)}
           />
           <TextInput
             name="code"
             value={CodeThree}
             style={styles.txtInput}
-            onChangeText={(CodeThree) => setCodeThree(CodeThree)}
+            onChangeText={() => setCodeThree(CodeThree)}
           />
           <TextInput
             name="code"
             value={CodeFour}
             style={styles.txtInput}
-            onChangeText={(CodeFour) => setCodeFour(CodeFour)}
+            onChangeText={() => setCodeFour(CodeFour)}
           />
         </Form>
       </Container>

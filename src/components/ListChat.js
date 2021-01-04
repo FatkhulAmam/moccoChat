@@ -18,7 +18,7 @@ class ListChat extends React.Component {
               <View style={styles.headerChat}>
                 <Text style={styles.name}>{this.props.name}</Text>
                 <Right />
-                <Icon name="check" />
+                {/* <Icon name="check" /> */}
                 <Text style={styles.date} note>
                   {this.props.time}
                 </Text>
@@ -28,7 +28,7 @@ class ListChat extends React.Component {
                   {this.props.lastMessage}
                 </Text>
                 <Right />
-                <Text style={styles.mount}>{this.props.mount}</Text>
+                {/* <Text style={styles.mount}>{this.props.mount}</Text> */}
               </View>
             </Card>
           </TouchableOpacity>
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
   },
   status: {
     fontSize: 17,
+    marginBottom: 3,
+    marginTop: 3,
   },
   press: {
     borderBottomWidth: 1,

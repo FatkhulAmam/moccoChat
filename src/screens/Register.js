@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View, StatusBar, Alert} from 'react-native';
-import {Container, Button, Text, Form, Item, Input} from 'native-base';
+import {Button, Text, Form, Item, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {Formik} from 'formik';

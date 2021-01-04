@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, TouchableOpacity, StatusBar} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, StatusBar} from 'react-native';
 import {Container, Button, Text, Form, Item, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {editMyName} from '../redux/action/profile';
 
 const ChangeName = () => {
-  const navigation = useNavigation();
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile.data);
   const [user_name, setName] = useState(profile.user_name);
@@ -27,7 +25,7 @@ const ChangeName = () => {
             <Input
               placeholder="user name"
               value={user_name}
-              onChangeText={(user_name) => setName(user_name)}
+              onChangeText={() => setName(user_name)}
             />
           </Item>
         </Form>

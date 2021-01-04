@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, TouchableOpacity, StatusBar} from 'react-native';
+import {StyleSheet, View, StatusBar} from 'react-native';
 import {Container, Button, Text, Form, Item, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {editBio} from '../redux/action/profile';
 
 const AddBio = () => {
-  const navigation = useNavigation();
   const token = useSelector((state) => state.auth.token);
   const profile = useSelector((state) => state.profile.data);
   const [Bio, setBio] = useState(profile.bio);
@@ -31,7 +29,7 @@ const AddBio = () => {
             <Input
               placeholder="Bio"
               value={Bio}
-              onChangeText={(Bio) => setBio(Bio)}
+              onChangeText={() => setBio(Bio)}
             />
           </Item>
         </Form>

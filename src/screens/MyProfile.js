@@ -4,7 +4,6 @@ import {
   Image,
   View,
   StatusBar,
-  Switch,
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
@@ -49,8 +48,8 @@ const setImageFullfilled = () => {
 };
 
 const MyProfile = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  // const [isEnabled, setIsEnabled] = useState(false);
+  // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const myProfile = useSelector((state) => state.profile.data);
