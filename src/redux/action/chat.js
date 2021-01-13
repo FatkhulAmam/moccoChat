@@ -6,9 +6,9 @@ const getChatList = (token) => ({
   payload: http(token).get('chat'),
 });
 
-const sendChatAction = (token, messages, recipient) => ({
+const sendChatAction = (token, messages, id) => ({
   type: 'SEND_CHAT',
-  payload: http(token).post('chat', qs.stringify({messages, recipient})),
+  payload: http(token).post(`chat/${id}`, qs.stringify({messages})),
 });
 
 const getChatDetail = (token, recipients) => ({
