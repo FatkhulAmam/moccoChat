@@ -5,8 +5,6 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
 import {useNavigation} from '@react-navigation/native';
 
-import AppLogo from '../assets/images/logo.svg';
-
 const slides = [
   {
     key: 'somethun',

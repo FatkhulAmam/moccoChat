@@ -21,7 +21,6 @@ import avatar from '../assets/images/profile.png';
 
 const ChatDetail = ({route}) => {
   const navigation = useNavigation();
-  const [chat, setChat] = useState('');
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const {dataDetail} = useSelector((state) => state.chat);

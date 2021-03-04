@@ -25,7 +25,7 @@ const ChangeName = () => {
             <Input
               placeholder="user name"
               value={user_name}
-              onChangeText={() => setName(user_name)}
+              socketonChangeText={() => setName(user_name)}
             />
           </Item>
         </Form>

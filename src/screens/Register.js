@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {API_URL} from '@env';
 
 import {makeAccount} from '../redux/action/auth';
 import LoadingIndicator from '../components/ModalLoading';
@@ -22,6 +23,7 @@ const Register = () => {
   const auth = useSelector((state) => state.auth);
 
   const InputRegister = async (data) => {
+    console.log(API_URL);
     await dispatch(makeAccount(data));
     if (auth.isError) {
       Alert.alert(auth.message);

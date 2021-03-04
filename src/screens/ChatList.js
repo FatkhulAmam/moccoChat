@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {API_URL} from '@env';
 import moment from 'moment';
 import PushNotification from 'react-native-push-notification';
-import socket from '../helpers/socket';
+import io from 'socket.io-client';
+import jwt_decode from 'jwt-decode';
 
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
@@ -17,12 +18,15 @@ const ChatList = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const {id} = jwt_decode(token);
   const profileId = useSelector((state) => state.profile.data.id);
   const {dataList} = useSelector((state) => state.chat);
 
   useEffect(() => {
     dispatch(getChatList(token));
-    socket.on(token, ({sender, message}) => {
+    const socket = io(`${API_URL}`);
+    console.log(socket);
+    socket.on(id, ({sender, message}) => {
       dispatch(getChatList(token));
       PushNotification.localNotification({
         sender,
@@ -32,7 +36,7 @@ const ChatList = () => {
     return () => {
       socket.close();
     };
-  }, [dispatch, token]);
+  }, [dispatch, id, token]);
 
   // const nextPage = async () => {
   //   const {nextLink} = data.pageInfo;

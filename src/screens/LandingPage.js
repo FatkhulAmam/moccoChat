@@ -22,11 +22,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {API_URL} from '@env';
-import PushNotification from 'react-native-push-notification';
-import socket from '../helpers/socket';
 
 import {getContactAction} from '../redux/action/contact';
-import {getChatList} from '../redux/action/chat';
 import avatar from '../assets/images/profile.png';
 
 class Item extends React.Component {
@@ -54,16 +51,6 @@ const Landing = () => {
 
   useEffect(() => {
     console.log(dispatch(getContactAction(token)));
-    socket.on(token, ({sender, message}) => {
-      dispatch(getChatList(token));
-      PushNotification.localNotification({
-        sender,
-        message,
-      });
-    });
-    return () => {
-      socket.close();
-    };
   }, [dispatch, token]);
 
   return (

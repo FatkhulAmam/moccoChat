@@ -16,8 +16,6 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import PushNotification from 'react-native-push-notification';
-import socket from '../helpers/socket';
 
 import {editMyName} from '../redux/action/profile';
 const registerValidationSchema = yup.object().shape({
@@ -25,7 +23,6 @@ const registerValidationSchema = yup.object().shape({
 });
 
 import {getMyProfile} from '../redux/action/profile';
-import {getChatList} from '../redux/action/chat';
 import LoadingIndicator from '../components/ModalLoading';
 
 const ChangeName = () => {
@@ -39,18 +36,6 @@ const ChangeName = () => {
     await dispatch(getMyProfile(token));
     navigation.navigate('LandingPage');
   };
-  useEffect(() => {
-    socket.on(token, ({sender, message}) => {
-      dispatch(getChatList(token));
-      PushNotification.localNotification({
-        sender,
-        message,
-      });
-    });
-    return () => {
-      socket.close();
-    };
-  }, [dispatch, token]);
 
   return (
     <>
