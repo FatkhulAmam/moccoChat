@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View, StatusBar, Alert} from 'react-native';
 import {Button, Text, Form, Item, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,8 +22,9 @@ const Register = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
+
   const InputRegister = async (data) => {
-    console.log(API_URL);
+    console.log(API_URL, data);
     await dispatch(makeAccount(data));
     if (auth.isError) {
       Alert.alert(auth.message);
