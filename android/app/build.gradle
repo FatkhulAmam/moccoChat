@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
+project.ext.react = [ enableHermes: true ]
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -122,6 +123,7 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    ndkVersion "major.minor.build"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -130,6 +132,7 @@ android {
 
     defaultConfig {
         applicationId "com.habdindalem.moccochat"
+        ndkVersion "22.1.7171670"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
