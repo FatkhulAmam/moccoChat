@@ -1,0 +1,12 @@
+diff --git a/node_modules/redux-logger/src/core.js b/node_modules/redux-logger/src/core.js
+index fba99bc..a48c8e6 100644
+--- a/node_modules/redux-logger/src/core.js
++++ b/node_modules/redux-logger/src/core.js
+@@ -97,7 +97,6 @@ function printBuffer(buffer, options) {
+       if (colors.prevState) {
+         const styles = `color: ${colors.prevState(prevState)}; font-weight: bold`;
+ 
+-        logger[prevStateLevel]('%c prev state', styles, prevState);
+       } else logger[prevStateLevel]('prev state', prevState);
+     }
+ 

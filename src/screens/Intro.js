@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, StatusBar} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {StyleSheet, View, Text, StatusBar, SafeAreaView} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
 import {useNavigation} from '@react-navigation/native';
@@ -32,40 +31,65 @@ const slides = [
 const Intro = (props) => {
   const navigation = useNavigation();
   const renderItem = ({item, dimension}) => (
-    <LinearGradient
-      style={[styles.mainContent, dimension]}
-      colors={item.colors}
-      start={{x: 0, y: 0.1}}
-      end={{x: 0.1, y: 1}}>
+    <SafeAreaView 
+    style={[styles.mainContent, dimension]}>
       <Icon
         style={{backgroundColor: 'transparent'}}
         name={item.icon}
         size={200}
-        color="white"
+        color="#421908"
       />
-      <View>
+      <View style={{marginHorizontal: 100}}>
         <Text style={styles.text}>{item.text}</Text>
         <Text style={styles.title}>{item.title}</Text>
       </View>
-    </LinearGradient>
+      </SafeAreaView>
   );
+
+
+  const _renderDoneButton = () => {
+    return (
+      <View style={styles.buttonCircle}>
+        <Icon
+          name="md-checkmark"
+          color="rgba(255, 255, 255, .9)"
+          size={24}
+        />
+      </View>
+    );
+  };
+  
+  const _renderNextButton = () => {
+    return (
+      <View style={styles.buttonCircle}>
+        <Icon
+          name="md-arrow-round-forward"
+          color="rgba(255, 255, 255, .9)"
+          size={24}
+        />
+      </View>
+    );
+  };
 
   return (
     <>
-      <StatusBar backgroundColor={'#421908'} />
+      <StatusBar backgroundColor={'#dbc9a0'} />
       <AppIntroSlider
         data={slides}
         renderItem={renderItem}
-        bottomButton
+        activeDotStyle={{backgroundColor: '#421908'}}
         onDone={() => navigation.navigate('Register')}
+        renderDoneButton={_renderDoneButton}
+        renderNextButton={_renderNextButton}
       />
-    </>
+      </>
   );
 };
 
 export default Intro;
 const styles = StyleSheet.create({
   mainContent: {
+    backgroundColor:'#dbc9a0',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -75,7 +99,7 @@ const styles = StyleSheet.create({
     height: 320,
   },
   text: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#421908',
     backgroundColor: 'transparent',
     textAlign: 'center',
     padding: 10,
@@ -83,9 +107,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    color: 'white',
+    color: '#421908',
     backgroundColor: 'transparent',
     textAlign: 'center',
     bottom: 100,
+  },
+  buttonCircle: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'rgba(0, 0, 0, .2)',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
