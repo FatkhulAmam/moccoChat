@@ -29,9 +29,9 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       {haveChat === [] ? (
-        <Drawer.Screen name="Home" component={LandingPage} />
+        <Drawer.Screen name="Home" component={LandingPage} options={{headerShown: false}}/>
       ) : (
-        <Drawer.Screen name="Chat" component={ChatList} />
+        <Drawer.Screen name="Chat" component={ChatList} options={{headerShown: false}}/>
       )}
     </Drawer.Navigator>
   );

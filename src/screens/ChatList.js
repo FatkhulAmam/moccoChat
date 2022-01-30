@@ -56,17 +56,24 @@ const ChatList = () => {
   return (
     <>
       <Header style={styles.header} transparent>
-        <StatusBar backgroundColor={'#421908'} />
+        <StatusBar backgroundColor={'#dbc9a0'} />
         <Button transparent onPress={() => navigation.openDrawer()}>
-          <Icon name="bars" size={22} color="#ffffff" />
+          <Icon name="bars" size={22} color="#421908" />
         </Button>
         <Title style={styles.title}>Mocco Chat</Title>
         <Right />
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon name="search" size={22} color="#ffffff" />
+          <Icon name="search" size={22} color="#421908" />
         </Button>
       </Header>
       <Container style={styles.parrent}>
+        <View
+          style={{
+            marginHorizontal: 15,
+            borderBottomColor: "#42190875",
+            borderBottomWidth: 2.5,
+          }}
+        />
         <FlatList
           data={dataList.results}
           keyExtractor={(item, index) => index.toString()}
@@ -122,7 +129,7 @@ const ChatList = () => {
           <Button
             style={styles.check}
             onPress={() => navigation.navigate('Contact')}>
-            <Icon name="pencil" size={30} color="#ffffff" />
+            <Icon name="pencil" size={30} color="#dbc9a0" />
           </Button>
         </View>
       </Container>
@@ -134,15 +141,16 @@ export default ChatList;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     alignItems: 'center',
   },
   title: {
+    color: '#421908',
     fontSize: 25,
     marginLeft: 25,
   },
   parrent: {
-    backgroundColor: '#fff5e7',
+    backgroundColor: '#dbc9a0',
   },
   btnCheck: {
     position: 'absolute',

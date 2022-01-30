@@ -31,11 +31,12 @@ export function DrawerContent(props) {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#fff5e7', marginTop: -5}}>
+    <View style={{flex: 1, backgroundColor: '#dbc9a0', marginTop: -5}}>
       <DrawerContentScrollView {...props}>
         <TouchableOpacity
           style={styles.headDrawer}
           onPress={() => navigation.navigate('MyProfile')}>
+          <View style={{borderWidth: 2, borderColor: '#421908', borderRadius: 50}}>
           <Image
             source={
               myProfile.data.photo
@@ -43,25 +44,51 @@ export function DrawerContent(props) {
                 : avatar
             }
             style={styles.ava}
-          />
+          /></View>
           <View>
             <Text style={styles.name}>{myProfile.data.user_name}</Text>
             <Text style={styles.number}>{myProfile.data.telphone}</Text>
           </View>
         </TouchableOpacity>
+        <View
+          style={{
+            marginHorizontal: 10,
+            borderBottomColor: "#42190825",
+            borderBottomWidth: 5,
+            borderRadius: 10
+          }}
+        />
         <View>
           <TouchableOpacity
             onPress={() => navigation.navigate('contact')}
             style={styles.contact}>
-            <Icon name="contacts" />
+            <Icon name="contacts" color='#421908' />
             <Text style={styles.TxtDrawer}>Kontak</Text>
           </TouchableOpacity>
+        <View
+          style={{
+            marginLeft: 10,
+            marginRight: 170,
+            borderBottomColor: "#42190825",
+            borderBottomWidth: 2,
+            borderRadius: 10
+          }}
+        />
           <TouchableOpacity
             onPress={() => navigation.navigate('CallLog')}
             style={styles.call}>
-            <Icon name="call" />
+            <Icon name="call" color='#421908'/>
             <Text style={styles.TxtDrawer}>Riwayat panggilan</Text>
           </TouchableOpacity>
+        <View
+          style={{
+            marginLeft: 10,
+            marginRight: 95,
+            borderBottomColor: "#42190825",
+            borderBottomWidth: 2,
+            borderRadius: 10
+          }}
+        />
         </View>
       </DrawerContentScrollView>
       <TouchableOpacity style={styles.bottomDrawer} onPress={logoutPres}>
@@ -74,23 +101,25 @@ export function DrawerContent(props) {
 
 const styles = StyleSheet.create({
   headDrawer: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     flexDirection: 'row',
     padding: 20,
     alignItems: 'center',
   },
   ava: {
-    height: 75,
-    width: 75,
+    height: 65,
+    width: 65,
     borderRadius: 50,
+    margin: 2
   },
   name: {
     marginLeft: 10,
-    fontSize: 20,
-    color: '#ffffff',
+    fontSize: 22.5,
+    color: '#421908',
     fontWeight: 'bold',
   },
   number: {
+    fontSize: 13,
     marginLeft: 10,
     color: 'gray',
   },
@@ -100,10 +129,12 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   TxtDrawer: {
-    fontSize: 18,
+    color: '#421908',
+    fontSize: 16,
     marginLeft: 15,
   },
   call: {
+    color: '#421908',
     flexDirection: 'row',
     alignItems: 'center',
     margin: 10,
@@ -114,7 +145,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   sign: {
-    fontSize: 20,
+    fontSize: 18,
     marginRight: 5,
   },
 });
