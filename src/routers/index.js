@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import NavigationBar from 'react-native-navbar-color'
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -38,6 +39,10 @@ const DrawerNavigator = () => {
 };
 
 const Route = () => {
+  useEffect(() => {
+    NavigationBar.setColor('#dbc9a0')
+  },[]);
+  
   const isRegister = useSelector((state) => state.auth.isRegistry);
   const haveName = useSelector((state) => state.profile.data.user_name);
 
@@ -56,9 +61,9 @@ const Route = () => {
             options={{
               title: 'Your Phone',
               headerStyle: {
-                backgroundColor: '#421908',
+                backgroundColor: '#dbc9a0',
               },
-              headerTintColor: '#fff',
+              headerTintColor: '#421908',
               headerTitleStyle: {
                 fontWeight: 'bold',
               },

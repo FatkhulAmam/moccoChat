@@ -6,9 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class ListChat extends React.Component {
   render() {
     return (
-      <>
         <View style={styles.renderParent}>
-          <TouchableOpacity onPress={this.props.moveDetailContact}>
+          <TouchableOpacity style={styles.borderAva} onPress={this.props.moveDetailContact}>
             <Image style={styles.pict} source={this.props.avatar} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -33,7 +32,6 @@ class ListChat extends React.Component {
             </Card>
           </TouchableOpacity>
         </View>
-      </>
     );
   }
 }
@@ -43,15 +41,18 @@ export default ListChat;
 const styles = StyleSheet.create({
   renderParent: {
     flexDirection: 'row',
-    marginLeft: 10,
-    marginTop: 10,
+    marginTop: 5,
     alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
   },
+  borderAva: {borderWidth: 1.5, borderColor: '#421908', borderRadius: 50},
   pict: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
     backgroundColor: '#8e8e8e',
     borderRadius: 50,
+    margin: 3,
   },
   headerChat: {
     flexDirection: 'row',
@@ -63,14 +64,13 @@ const styles = StyleSheet.create({
   },
   status: {
     fontSize: 17,
-    marginBottom: 3,
     marginTop: 3,
   },
   press: {
     borderBottomWidth: 1,
-    width: 270,
+    width: '75%',
     marginLeft: 10,
-    borderBottomColor: '#e8e8e8',
+    borderBottomColor: '#8e8e8e',
   },
   mount: {
     backgroundColor: 'lightblue',

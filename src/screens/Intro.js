@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet, View, Text, StatusBar, SafeAreaView} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
@@ -28,7 +28,7 @@ const slides = [
   },
 ];
 
-const Intro = (props) => {
+const Intro = () => {
   const navigation = useNavigation();
   const renderItem = ({item, dimension}) => (
     <SafeAreaView 
@@ -73,7 +73,7 @@ const Intro = (props) => {
 
   return (
     <>
-      <StatusBar backgroundColor={'#dbc9a0'} />
+      <StatusBar backgroundColor={'#dbc9a0'} barStyle="dark-content" />
       <AppIntroSlider
         data={slides}
         renderItem={renderItem}

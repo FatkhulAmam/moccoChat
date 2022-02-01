@@ -40,7 +40,7 @@ const ChangeName = () => {
   return (
     <>
       <Header style={styles.header} transparent>
-        <StatusBar backgroundColor={'#421908'} />
+        <StatusBar backgroundColor={'#dbc9a0'} />
         <Title style={styles.title}>Your Name</Title>
         <Right />
       </Header>
@@ -64,7 +64,7 @@ const ChangeName = () => {
               <Form>
                 <Item style={styles.name}>
                   <Input
-                    placeholder="user name"
+                    placeholder="username"
                     value={values.user_name}
                     onChangeText={handleChange('user_name')}
                     onBlur={handleBlur('user_name')}
@@ -82,7 +82,7 @@ const ChangeName = () => {
                   style={styles.check}
                   onPress={handleSubmit}
                   disabled={!isValid}>
-                  <Icon name="check" size={30} color="#ffffff" />
+                  <Icon name="check" size={30} color="#dbc9a0" />
                 </Button>
               </View>
             </Container>
@@ -101,23 +101,24 @@ const styles = StyleSheet.create({
   parrent: {
     paddingRight: 1,
     flex: 1,
-    backgroundColor: '#fff5e7',
+    backgroundColor: '#dbc9a0',
   },
   header: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     alignItems: 'center',
   },
   title: {
     fontSize: 20,
     marginLeft: 10,
+    color: '#421908'
   },
   name: {
-    width: 325,
+    width: '92%',
     borderWidth: 1,
     marginTop: 25,
   },
   textBottom: {
-    fontSize: 17,
+    fontSize: 12,
     marginLeft: 15,
     marginTop: 20,
   },

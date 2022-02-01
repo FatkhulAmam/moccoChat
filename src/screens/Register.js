@@ -35,7 +35,7 @@ const Register = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={'#421908'} />
+      <StatusBar backgroundColor={'#dbc9a0'} barStyle="dark-content" />
       {auth.isLoading === false ? (
         <Formik
           validationSchema={registerValidationSchema}
@@ -61,7 +61,7 @@ const Register = () => {
                   <Item style={styles.code}>
                     <Input value="+62" />
                   </Item>
-                  <View>
+                  <View style={{width: '90%'}}>
                     <Item style={styles.phone}>
                       <Input
                         name="phoneNumber"
@@ -87,7 +87,7 @@ const Register = () => {
                   style={styles.check}
                   onPress={handleSubmit}
                   disabled={!isValid}>
-                  <Icon name="arrow-right" size={30} color="#ffffff" />
+                  <Icon name="arrow-right" size={30} color="#dbc9a0" />
                 </Button>
               </View>
             </View>
@@ -106,27 +106,28 @@ const styles = StyleSheet.create({
   parrent: {
     paddingRight: 15,
     flex: 1,
-    backgroundColor: '#fff5e7',
+    backgroundColor: '#dbc9a0',
     paddingTop: 25,
   },
   container: {
+    flexDirection: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   code: {
-    width: 50,
+    width: '10%',
     borderBottomColor: 'blue',
     borderWidth: 1,
     marginTop: 25,
   },
   phone: {
-    width: 265,
+    width: '92.5%',
     borderWidth: 1,
     marginTop: 25,
   },
   textBottom: {
-    fontSize: 17,
+    fontSize: 12,
     marginLeft: 15,
     marginTop: 20,
   },

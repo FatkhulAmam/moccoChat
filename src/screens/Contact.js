@@ -24,7 +24,7 @@ class Item extends React.Component {
           <Image style={styles.pict} source={this.props.avatar} />
           <View>
             <Text style={styles.name}>{this.props.name}</Text>
-            <Text style={styles.status}>{this.props.phone}</Text>
+            <Text style={styles.status} note>{this.props.phone}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -47,25 +47,25 @@ const ContactScreen = () => {
   return (
     <>
       <Header style={styles.header} transparent>
-        <StatusBar backgroundColor={'#421908'} />
+        <StatusBar backgroundColor={'#dbc9a0'} />
         <Icon
           name="bars"
           size={22}
-          color="#ffffff"
+          color="#421908"
           onPress={() => navigation.openDrawer()}
         />
-        <Title style={styles.title}>Mocco Chat</Title>
+        <Title style={styles.title}>MocContact</Title>
         <Right />
         <Button transparent onPress={() => navigation.navigate('Search')}>
-          <Icon name="search" size={22} color="#ffffff" />
+          <Icon name="search" size={22} color="#421908" />
         </Button>
       </Header>
       <Container style={styles.parrent}>
-        <Text style={styles.kontakTxt}>Kontak anda di Mocco</Text>
         <FlatList
           style={styles.kontakData}
           data={contactData.data}
           keyExtractor={(item, index) => index.toString()}
+          scrollEnabled={false}
           renderItem={({item, index}) => (
             <Item
               name={item.user_name ? item.user_name : item.telphone}
@@ -84,7 +84,7 @@ export default ContactScreen;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     alignItems: 'center',
   },
   parrent: {
@@ -94,19 +94,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     marginLeft: 25,
+    color: '#421908'
   },
   kontakTxt: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#1c3661',
-    marginTop: 10,
-    backgroundColor: '#fff5e7',
+    backgroundColor: '#dbc9a0',
     padding: 10,
   },
   kontakData: {
     backgroundColor: '#fff5e7',
-    paddingLeft: 15,
-    marginRight: 10,
+    paddingLeft: 10,
   },
   renderParent: {
     flexDirection: 'row',
@@ -127,18 +126,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#421908',
   },
   pict: {
-    width: 65,
-    height: 65,
+    width: 50,
+    height: 50,
     backgroundColor: '#8e8e8e',
     borderRadius: 50,
   },
   name: {
-    fontSize: 20,
+    fontSize: 18,
     marginLeft: 10,
     fontWeight: 'bold',
   },
   status: {
     marginLeft: 10,
-    color: '#a7bfd0',
+    fontSize: 14
   },
 });

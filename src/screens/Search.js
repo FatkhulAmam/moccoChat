@@ -20,7 +20,6 @@ class Item extends React.Component {
   render() {
     return (
       <TouchableOpacity onPress={this.props.movePage}>
-        <StatusBar backgroundColor={'#421908'} />
         <View style={styles.renderParent} source={this.props.avatar}>
           <Image style={styles.pict} />
           <View>
@@ -33,7 +32,7 @@ class Item extends React.Component {
   }
 }
 
-const Landing = () => {
+const Landing = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -54,8 +53,9 @@ const Landing = () => {
   return (
     <>
       <Header style={styles.header} transparent>
-        <Button transparent onPress={() => this.props.navigation.goBack()}>
-          <Icon name="arrow-back" size={30} color="#ffffff" />
+      <StatusBar backgroundColor={'#dbc9a0'} />
+        <Button transparent onPress={() => props.navigation.goBack()}>
+          <Icon name="arrow-back" size={30} color="#421908" />
         </Button>
         <Body>
           <View style={styles.searchContainer}>
@@ -65,7 +65,7 @@ const Landing = () => {
               onChangeText={() => setSearchValues(searchValues)}
             />
             <TouchableOpacity style={styles.icon} onPress={submitSearch}>
-              <Icon name="search" size={30} color="#ffffff" />
+              <Icon name="search" size={30} color="#421908" />
             </TouchableOpacity>
           </View>
         </Body>
@@ -94,16 +94,17 @@ export default Landing;
 
 const styles = StyleSheet.create({
   search: {
-    width: 300,
+    width: '100%',
     height: 40,
-    borderWidth: 1,
-    borderColor: '#C8C8C8',
-    borderRadius: 50,
-    paddingLeft: 15,
-    fontSize: 20,
+    borderBottomWidth: 1,
+    borderColor: '#421908',
+    fontSize: 16,
     marginLeft: 13,
     marginTop: 5,
-    color: '#ffffff',
+    color: '#421908',
+  },
+  searchContainer: {
+    width: '95%',
   },
   icon: {
     position: 'absolute',
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     right: 15,
   },
   header: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     alignItems: 'center',
   },
   parrent: {
@@ -123,18 +124,15 @@ const styles = StyleSheet.create({
     marginLeft: 25,
   },
   kontakTxt: {
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#1c3661',
+    color: '#421908',
     backgroundColor: '#fff5e7',
     padding: 10,
   },
   kontakData: {
     backgroundColor: '#fff5e7',
     paddingLeft: 15,
-  },
-  searchContainer: {
-    position: 'relative',
   },
   renderParent: {
     flexDirection: 'row',

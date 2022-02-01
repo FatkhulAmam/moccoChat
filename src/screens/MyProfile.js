@@ -13,6 +13,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {API_URL} from '@env';
 import Icon from 'react-native-ionicons';
 import ImagePicker from 'react-native-image-picker';
+import LinearGradient from 'react-native-linear-gradient';
 
 import avatar from '../assets/images/profile.png';
 import {getMyProfile, editAvatar} from '../redux/action/profile';
@@ -47,7 +48,7 @@ const setImageFullfilled = () => {
   );
 };
 
-const MyProfile = () => {
+const MyProfile = (props) => {
   // const [isEnabled, setIsEnabled] = useState(false);
   // const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const navigation = useNavigation();
@@ -97,19 +98,30 @@ const MyProfile = () => {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
-      <View>
+      <View style={{height: '50%'}}>
         <Image style={styles.avatar} source={AvatarSource} />
+        <TouchableOpacity style={styles.back} onPress={()=>props.navigation.goBack()}>
         <Icon
-          style={styles.back}
           android="arrow-back"
           size={35}
-          color="#ffffff"
+          color="#421908"
         />
-        <Icon style={styles.call} android="more" size={35} color="#ffffff" />
+        </TouchableOpacity>
+        <LinearGradient
+        colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
+        style={{
+          width: '100%',
+          height: '25%', 
+          position: 'absolute',
+          bottom: 0
+        }}/>
+        <Icon style={styles.call} android="more" size={35} color="#421908" />
+        <View style={{position: 'absolute', bottom: 10}}>
         <Text style={styles.name}>
           {myProfile.user_name ? myProfile.user_name : myProfile.telphone}
         </Text>
         <Text style={styles.status}>online</Text>
+        </View>
       </View>
       <View style={styles.div}>
         <Text style={styles.info}>Akun</Text>
@@ -148,7 +160,7 @@ export default MyProfile;
 const styles = StyleSheet.create({
   avatar: {
     width: 'auto',
-    height: 360,
+    height: '100%',
   },
   back: {
     position: 'absolute',
@@ -161,31 +173,28 @@ const styles = StyleSheet.create({
     top: 30,
   },
   name: {
-    position: 'absolute',
-    bottom: 40,
-    fontSize: 45,
+    fontSize: 25,
     fontWeight: 'bold',
     marginLeft: 20,
     color: '#ffffff',
   },
   status: {
-    position: 'absolute',
-    bottom: 20,
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 20,
   },
   div: {
+    height: '50%',
     padding: 20,
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
   },
   info: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ecccb4',
+    color: '#421908',
   },
   btnCheck: {
     position: 'absolute',
-    bottom: 250,
+    top: '46%',
     right: 15,
     flexDirection: 'row',
     borderRadius: 50,
@@ -195,7 +204,7 @@ const styles = StyleSheet.create({
     height: 65,
     borderRadius: 50,
     justifyContent: 'center',
-    backgroundColor: '#ecccb4',
+    backgroundColor: '#421908',
   },
   border: {
     borderBottomWidth: 1,
@@ -203,10 +212,11 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   text: {
-    fontSize: 20,
-    color: '#ecccb4',
+    fontSize: 18,
+    color: '#421908',
   },
   tag: {
     color: '#fff5e7',
+    fontSize: 14
   },
 });

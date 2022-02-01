@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Image, View, StatusBar, Switch} from 'react-native';
+import {StyleSheet, Image, View, StatusBar, Switch, TouchableOpacity} from 'react-native';
 import {Button, Text} from 'native-base';
 import Icon from 'react-native-ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 import {API_URL} from '@env';
 
 import avatar from '../assets/images/profile.png';
@@ -25,7 +26,7 @@ const MyProfile = ({route}) => {
   return (
     <>
       <StatusBar translucent backgroundColor="transparent" />
-      <View>
+      <View style={{width: '100%', height: '50%'}}>
         <Image
           style={styles.avatar}
           source={
@@ -33,17 +34,31 @@ const MyProfile = ({route}) => {
           }
           color="#000000"
         />
-        <Icon
+        <TouchableOpacity
           style={styles.back}
+          onPress={() => navigation.goBack()}
+        >
+        <Icon
           android="arrow-back"
           size={35}
-          color="#ffffff"
+          color="#421908"
         />
-        <Icon style={styles.call} android="call" size={30} color="#ffffff" />
+        </TouchableOpacity>
+        <LinearGradient
+        colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
+        style={{
+          width: '100%',
+          height: '25%', 
+          position: 'absolute',
+          bottom: 0
+        }}/>
+        <Icon style={styles.call} android="call" size={30} color="#421908" />
+        <View style={{position: 'absolute', bottom: 10}}>
         <Text style={styles.name}>
           {dataContact.user_name ? dataContact.user_name : dataContact.telphone}
         </Text>
         <Text style={styles.status}>online</Text>
+        </View>
       </View>
       <View style={styles.div}>
         <Text style={styles.info}>Info</Text>
@@ -86,8 +101,8 @@ export default MyProfile;
 
 const styles = StyleSheet.create({
   avatar: {
-    width: 360,
-    height: 360,
+    width: '100%',
+    height: '100%',
   },
   back: {
     position: 'absolute',
@@ -100,27 +115,24 @@ const styles = StyleSheet.create({
     top: 30,
   },
   name: {
-    position: 'absolute',
-    bottom: 40,
-    fontSize: 45,
+    fontSize: 25,
     fontWeight: 'bold',
     marginLeft: 20,
-    color: '#ffffff',
+    color: '#fff',
   },
   status: {
-    position: 'absolute',
-    bottom: 20,
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 20,
   },
   div: {
+    height: '50%',
     padding: 20,
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
   },
   info: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ecccb4',
+    color: '#421908',
   },
   accountInfo: {
     borderBottomWidth: 1,
@@ -128,21 +140,21 @@ const styles = StyleSheet.create({
   },
   number: {
     marginTop: 20,
-    fontSize: 20,
-    color: '#ecccb4',
+    fontSize: 18,
+    color: '#421908',
   },
   txtbio: {
     marginTop: 20,
-    fontSize: 20,
-    color: '#ecccb4',
+    fontSize: 18,
+    color: '#421908',
   },
   notif: {
-    fontSize: 20,
-    color: '#ecccb4',
+    fontSize: 18,
+    color: '#421908',
   },
   btnCheck: {
     position: 'absolute',
-    bottom: 250,
+    top: '46%',
     right: 15,
     flexDirection: 'row',
   },
@@ -151,12 +163,14 @@ const styles = StyleSheet.create({
     height: 65,
     borderRadius: 50,
     justifyContent: 'center',
-    backgroundColor: '#ecccb4',
+    backgroundColor: '#421908',
   },
   note: {
     color: '#fff5e7',
+    fontSize: 14,
   },
   bio: {
+    fontSize: 14,
     color: '#fff5e7',
   },
   labelNotif: {
@@ -164,6 +178,7 @@ const styles = StyleSheet.create({
     width: 250,
   },
   notifStatus: {
+    fontSize: 14,
     color: '#fff5e7',
   },
   notifContainer: {

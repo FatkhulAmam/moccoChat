@@ -59,9 +59,12 @@ const ChatDetail = ({route}) => {
       <TouchableOpacity
         onPress={() => navigation.navigate('ContactProfile', dataContact.id)}>
         <Header style={styles.header} transparent>
-          <StatusBar backgroundColor={'#421908'} />
+          <StatusBar
+            backgroundColor={'#dbc9a0'} 
+            barStyle="dark-content"
+          />
           <Button transparent onPress={() => navigation.navigate('Chat')}>
-            <Icon name="arrow-back" size={30} color="#ffffff" />
+            <Icon name="arrow-back" size={30} color="#421908" />
           </Button>
           <Image
             style={styles.avatar}
@@ -82,7 +85,7 @@ const ChatDetail = ({route}) => {
           </View>
           <Right />
           <Button transparent onPress={() => navigation.navigate('')}>
-            <Icon name="more" size={35} color="#ffffff" />
+            <Icon name="more" size={35} color="#421908" />
           </Button>
         </Header>
       </TouchableOpacity>
@@ -123,13 +126,14 @@ export default ChatDetail;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#421908',
+    backgroundColor: '#dbc9a0',
     alignItems: 'center',
     height: 100,
   },
   parrent: {
     flex: 1,
-    backgroundColor: '#fff5e7',
+    backgroundColor: '#e8e8e8',
+    // backgroundColor: '#E9DEC4',
     paddingBottom: 50,
   },
   title: {
@@ -147,12 +151,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   name: {
-    color: '#ffffff',
-    fontSize: 18,
+    color: '#421908',
+    fontSize: 20,
     fontWeight: 'bold',
   },
   status: {
-    color: '#fff5e7',
+    color: '#210D04',
   },
   inputChat: {
     flexDirection: 'row',
@@ -172,5 +176,6 @@ const styles = StyleSheet.create({
   },
   write: {
     flexDirection: 'row',
+    width: 230,
   },
 });

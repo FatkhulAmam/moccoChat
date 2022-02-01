@@ -22,7 +22,7 @@ const AddBio = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={'#421908'} />
+      <StatusBar backgroundColor={'#dbc9a0'} />
       <Container style={styles.parrent}>
         <Form>
           <Item style={styles.bio}>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
   },
   textBottom: {
-    fontSize: 17,
+    fontSize: 16,
     marginLeft: 15,
     marginTop: 20,
   },

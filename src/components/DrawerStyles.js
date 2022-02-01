@@ -30,12 +30,17 @@ export function DrawerContent(props) {
     dispatch(destroyContact());
   };
 
+  const goToProfile = () => {
+    navigation.navigate('MyProfile')
+    props.navigation.closeDrawer();
+  }
+
   return (
     <View style={{flex: 1, backgroundColor: '#dbc9a0', marginTop: -5}}>
       <DrawerContentScrollView {...props}>
         <TouchableOpacity
           style={styles.headDrawer}
-          onPress={() => navigation.navigate('MyProfile')}>
+          onPress={() => goToProfile()}>
           <View style={{borderWidth: 2, borderColor: '#421908', borderRadius: 50}}>
           <Image
             source={

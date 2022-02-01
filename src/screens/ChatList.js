@@ -56,7 +56,7 @@ const ChatList = () => {
   return (
     <>
       <Header style={styles.header} transparent>
-        <StatusBar backgroundColor={'#dbc9a0'} />
+        <StatusBar backgroundColor={'#dbc9a0'} barStyle="dark-content" />
         <Button transparent onPress={() => navigation.openDrawer()}>
           <Icon name="bars" size={22} color="#421908" />
         </Button>
@@ -69,7 +69,6 @@ const ChatList = () => {
       <Container style={styles.parrent}>
         <View
           style={{
-            marginHorizontal: 15,
             borderBottomColor: "#42190875",
             borderBottomWidth: 2.5,
           }}
@@ -146,11 +145,11 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#421908',
-    fontSize: 25,
+    fontSize: 20,
     marginLeft: 25,
   },
   parrent: {
-    backgroundColor: '#dbc9a0',
+    backgroundColor: '#fff5e7',
   },
   btnCheck: {
     position: 'absolute',
