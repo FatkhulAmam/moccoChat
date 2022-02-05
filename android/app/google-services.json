@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440130921893",
+    "project_id": "mocco-chat",
+    "storage_bucket": "mocco-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440130921893:android:b321a5ab664e62081e344c",
+        "android_client_info": {
+          "package_name": "com.habdindalem.moccochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440130921893-oe3ln3j5j5thvbccr5jhdg1ip88jk7ff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAimf9q0LTO2pgeqruid2H07rF00rK9yd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440130921893-oe3ln3j5j5thvbccr5jhdg1ip88jk7ff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

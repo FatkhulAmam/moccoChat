@@ -12,6 +12,8 @@ import {Button, Card, Body, Header, Right, Text} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-ionicons';
+import jwt_decode from 'jwt-decode';
+import io from 'socket.io-client';
 import {API_URL} from '@env';
 
 import MessageBubble from '../components/bubbleChat';
@@ -23,13 +25,18 @@ const ChatDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const {id} = jwt_decode(token);
   const {dataDetail} = useSelector((state) => state.chat);
   const dataContact = useSelector((state) => state.detailContact.data);
 
   const [recipient, setRecipient] = useState(route.params);
-  const [messages, setMessages] = useState('');
+  const [messages, setMessages] = useState(''); 
 
   useEffect(() => {
+    const socket = io(`${API_URL}`);
+    socket.on(id, (value) => {
+      dispatch(getChatDetail(token, route.params));
+    })
     dispatch(getChatDetail(token, route.params));
     dispatch(getContactDetail(token, route.params));
   }, [dispatch, token, route.params]);

@@ -4,7 +4,7 @@ import {Container, Button, Header, Title, Right} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {API_URL} from '@env';
 import moment from 'moment';
-import PushNotification from 'react-native-push-notification';
+import PushNotification, {Importance}from 'react-native-push-notification';
 import io from 'socket.io-client';
 import jwt_decode from 'jwt-decode';
 
@@ -23,15 +23,28 @@ const ChatList = () => {
   const {dataList} = useSelector((state) => state.chat);
 
   useEffect(() => {
+    PushNotification.createChannel(
+      {
+        channelId: "Mocco-Chat-App",
+        channelName: "Mocco-Chat-Channel",
+        channelDescription: "A channel to categorise your notifications",
+        playSound: false,
+        soundName: "default",
+        importance: Importance.HIGH,
+        vibrate: true,
+      },
+      (created) => console.log(`createChannel returned '${created}'`)
+    );
     dispatch(getChatList(token));
     const socket = io(`${API_URL}`);
-    console.log(socket);
     socket.on(id, ({sender, message}) => {
-      dispatch(getChatList(token));
       PushNotification.localNotification({
-        sender,
-        message,
-      });
+        id: sender,
+        channelId: "Mocco-Chat-App",
+        message: message,
+        title: 'Mocco Chat'
+      })
+      dispatch(getChatList(token));
     });
     return () => {
       socket.close();
