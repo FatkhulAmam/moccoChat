@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import NavigationBar from 'react-native-navbar-color'
+import Firebase from '@react-native-firebase/app';
+import PushNotification, {Importance} from "react-native-push-notification";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -38,9 +40,44 @@ const DrawerNavigator = () => {
   );
 };
 
+const configurationOptions = {
+  debug: true,
+  promptOnMissingPlayServices: true
+}
+
 const Route = () => {
   useEffect(() => {
     NavigationBar.setColor('#dbc9a0')
+    PushNotification.createChannel(
+      {
+        channelId: "Mocco-Chat-App",
+        channelName: "Mocco-Chat-Channel",
+        channelDescription: "A channel to categorise your notifications",
+        playSound: false,
+        soundName: "default",
+        importance: Importance.HIGH,
+        vibrate: true,
+      },
+      (created) => console.log(`createChannel returned '${created}'`)
+    );
+    Firebase.initializeApp(configurationOptions)
+    PushNotification.configure({
+      onRegister: function (token) {
+        console.log("TOKEN:", token);
+      },
+      onNotification: function (notification) {
+        PushNotification.localNotification({
+          channelId: "Mocco-Chat-App",
+          message: notification.message,
+          title: notification.title
+        })
+      },
+      onRegistrationError: function(err) {
+        console.error(err.message, err);
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    })
   },[]);
   
   const isRegister = useSelector((state) => state.auth.isRegistry);

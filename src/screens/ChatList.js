@@ -13,8 +13,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getChatList} from '../redux/action/chat';
 import ListChat from '../components/ListChat';
 import avatar from '../assets/images/profile.png';
+import Firebase from '@react-native-firebase/app';
+import {addDeviceToken} from '../redux/action/profile';
 
-const ChatList = () => {
+const ChatList = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -22,19 +24,9 @@ const ChatList = () => {
   const profileId = useSelector((state) => state.profile.data.id);
   const {dataList} = useSelector((state) => state.chat);
 
-  useEffect(() => {
-    PushNotification.createChannel(
-      {
-        channelId: "Mocco-Chat-App",
-        channelName: "Mocco-Chat-Channel",
-        channelDescription: "A channel to categorise your notifications",
-        playSound: false,
-        soundName: "default",
-        importance: Importance.HIGH,
-        vibrate: true,
-      },
-      (created) => console.log(`createChannel returned '${created}'`)
-    );
+  useEffect(async () => {
+    const device_token = await Firebase. messaging(). getToken()
+    await dispatch(addDeviceToken(token, device_token))
     dispatch(getChatList(token));
     const socket = io(`${API_URL}`);
     socket.on(id, ({sender, message}) => {

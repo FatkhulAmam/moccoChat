@@ -17,9 +17,13 @@ const editAvatar = (token, data) => ({
   type: 'EDIT_AVA',
   payload: http(token).patch('user', data),
 });
+const addDeviceToken = (token, device_token) => ({
+  type: 'DEVICE_TOKEN',
+  payload: http(token).patch('user', qs.stringify({device_token})),
+});
 
 const destroyProfile = () => ({
   type: 'DESTROY',
 });
 
-export {getMyProfile, editMyName, editBio, editAvatar, destroyProfile};
+export {getMyProfile, editMyName, editBio, editAvatar, destroyProfile, addDeviceToken};

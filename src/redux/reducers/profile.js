@@ -103,6 +103,29 @@ export default (state = initialState, action) => {
         message: 'edit bio success',
       };
     }
+    // add device token
+    case 'DEVICE_TOKEN_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'DEVICE_TOKEN_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: 'cannot edit avatar',
+      };
+    }
+    case 'DEVICE_TOKEN_FULFILLED': {
+      return {
+        ...state,
+        isError: false,
+        isLoading: false,
+        message: 'edit avatar success',
+      };
+    }
     default: {
       return state;
     }

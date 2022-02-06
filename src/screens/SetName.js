@@ -12,6 +12,7 @@ import {
   Right,
 } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import messaging from '@react-native-firebase/messaging';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import {Formik} from 'formik';
@@ -31,11 +32,27 @@ const ChangeName = () => {
   const profile = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
+  useEffect(async () => {
+    requestUserPermission()
+  }, []);
+  
+
   const InputName = async (data) => {
     await dispatch(editMyName(token, data));
     await dispatch(getMyProfile(token));
     navigation.navigate('LandingPage');
-  };
+  }
+
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
 
   return (
     <>
