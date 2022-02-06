@@ -72,7 +72,7 @@ export default bubbleChat;
 const styles = StyleSheet.create({
   message: {
     flexDirection: 'row',
-    marginVertical: moderateScale(7, 2),
+    marginVertical: moderateScale(7, 5),
   },
   mine: {
     marginLeft: 20,

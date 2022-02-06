@@ -8,7 +8,7 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import {Button, Card, Body, Header, Right, Text} from 'native-base';
+import {Button, Header, Right, Text} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-ionicons';
@@ -108,23 +108,20 @@ const ChatDetail = ({route}) => {
           )}
           inverted
         />
+        <View style={styles.inputChat}>
+            <Icon name="happy" size={30} color="#8e8e8e" />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Pesan"
+              value={messages}
+              multiline={true}    
+              onChangeText={(messages) => setMessages(messages)}
+            />
+            <TouchableOpacity transparent onPress={sendMessages}>
+              <Icon name="send" color="#8e8e8e" style={{marginLeft: 5}} />
+            </TouchableOpacity>
+        </View>
       </View>
-      <Card style={styles.inputChat} transparent>
-        <Body style={styles.write}>
-          <Icon name="happy" size={30} color="#8e8e8e" />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Pesan"
-            value={messages}
-            onChangeText={(messages) => setMessages(messages)}
-          />
-          {/* <Icon name='attach' size={30} color='#8e8e8e' style={{ marginRight: 30 }} />
-                    <Icon name='mic' size={30} color='#8e8e8e' /> */}
-          <TouchableOpacity transparent onPress={sendMessages}>
-            <Icon name="send" color="#8e8e8e" style={{marginLeft: 40}} />
-          </TouchableOpacity>
-        </Body>
-      </Card>
     </>
   );
 };
@@ -140,7 +137,6 @@ const styles = StyleSheet.create({
   parrent: {
     flex: 1,
     backgroundColor: '#e8e8e8',
-    // backgroundColor: '#E9DEC4',
     paddingBottom: 50,
   },
   title: {
@@ -168,18 +164,19 @@ const styles = StyleSheet.create({
   inputChat: {
     flexDirection: 'row',
     position: 'absolute',
-    padding: 10,
-    bottom: -4,
-    height: 50,
+    paddingVertical: 2,
+    paddingHorizontal: 15,
+    bottom: 5,
     width: '100%',
     backgroundColor: '#ecccb4',
-    borderRadius: 25,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   textInput: {
-    width: 230,
-    height: 50,
-    fontSize: 18,
-    marginLeft: 8,
+    width: '85%',
+    fontSize: 16,
+    marginLeft: 5,
   },
   write: {
     flexDirection: 'row',
