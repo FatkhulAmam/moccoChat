@@ -21,9 +21,13 @@ const addDeviceToken = (token, device_token) => ({
   type: 'DEVICE_TOKEN',
   payload: http(token).patch('user', qs.stringify({device_token})),
 });
+const addSocketId =(token, socketId) => ({
+  type: "SOCKET_ID",
+  payload: http(token).patch('user', qs.stringify({socketId}))
+})
 
 const destroyProfile = () => ({
   type: 'DESTROY',
 });
 
-export {getMyProfile, editMyName, editBio, editAvatar, destroyProfile, addDeviceToken};
+export {getMyProfile, editMyName, editBio, editAvatar, destroyProfile, addDeviceToken, addSocketId};

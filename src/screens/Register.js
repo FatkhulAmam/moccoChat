@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View, StatusBar, Alert} from 'react-native';
 import {Button, Text, Form, Item, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,7 +21,6 @@ const registerValidationSchema = yup.object().shape({
 const Register = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
 
   const InputRegister = async (data) => {
     console.log(API_URL, data);
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     paddingTop: 25,
   },
   container: {
-    flexDirection: 1,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

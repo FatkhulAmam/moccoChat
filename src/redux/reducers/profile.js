@@ -126,6 +126,29 @@ export default (state = initialState, action) => {
         message: 'edit avatar success',
       };
     }
+    // add socket id
+    case 'SOCKET_ID_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case 'SOCKET_ID_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        message: 'cannot add socket',
+      };
+    }
+    case 'SOCKET_ID_FULFILLED': {
+      return {
+        ...state,
+        isError: false,
+        isLoading: false,
+        message: 'add socket',
+      };
+    }
     default: {
       return state;
     }

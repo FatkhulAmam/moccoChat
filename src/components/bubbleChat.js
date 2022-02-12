@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     right: -10,
-    top: 42
+    top: 42,
   },
   arrow_left: {
     left: moderateScale(-6, 0.5),

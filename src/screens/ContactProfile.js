@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Image, View, StatusBar, Switch, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  StatusBar,
+  Switch,
+  TouchableOpacity,
+} from 'react-native';
 import {Button, Text} from 'native-base';
 import Icon from 'react-native-ionicons';
 import {useNavigation} from '@react-navigation/native';
@@ -36,28 +43,26 @@ const MyProfile = ({route}) => {
         />
         <TouchableOpacity
           style={styles.back}
-          onPress={() => navigation.goBack()}
-        >
-        <Icon
-          android="arrow-back"
-          size={35}
-          color="#421908"
-        />
+          onPress={() => navigation.goBack()}>
+          <Icon android="arrow-back" size={35} color="#421908" />
         </TouchableOpacity>
         <LinearGradient
-        colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
-        style={{
-          width: '100%',
-          height: '25%', 
-          position: 'absolute',
-          bottom: 0
-        }}/>
+          colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
+          style={{
+            width: '100%',
+            height: '25%',
+            position: 'absolute',
+            bottom: 0,
+          }}
+        />
         <Icon style={styles.call} android="call" size={30} color="#421908" />
         <View style={{position: 'absolute', bottom: 10}}>
-        <Text style={styles.name}>
-          {dataContact.user_name ? dataContact.user_name : dataContact.telphone}
-        </Text>
-        <Text style={styles.status}>online</Text>
+          <Text style={styles.name}>
+            {dataContact.user_name
+              ? dataContact.user_name
+              : dataContact.telphone}
+          </Text>
+          <Text style={styles.status}>online</Text>
         </View>
       </View>
       <View style={styles.div}>

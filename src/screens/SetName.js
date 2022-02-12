@@ -33,22 +33,21 @@ const ChangeName = () => {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    requestUserPermission()
+    requestUserPermission();
   }, []);
-  
 
   const InputName = async (data) => {
     await dispatch(editMyName(token, data));
     await dispatch(getMyProfile(token));
     navigation.navigate('LandingPage');
-  }
+  };
 
   async function requestUserPermission() {
     const authStatus = await messaging().requestPermission();
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-  
+
     if (enabled) {
       console.log('Authorization status:', authStatus);
     }
@@ -127,7 +126,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginLeft: 10,
-    color: '#421908'
+    color: '#421908',
   },
   name: {
     width: '92%',

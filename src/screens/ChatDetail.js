@@ -28,6 +28,7 @@ const ChatDetail = ({route}) => {
   const {id} = jwt_decode(token);
   const {dataDetail} = useSelector((state) => state.chat);
   const dataContact = useSelector((state) => state.detailContact.data);
+  const state = useSelector((state) => state);
 
   const [recipient, setRecipient] = useState(route.params);
   const [messages, setMessages] = useState(''); 
@@ -90,10 +91,14 @@ const ChatDetail = ({route}) => {
             </Text>
             <Text style={styles.status}>Online</Text>
           </View>
-          <Right />
-          <Button transparent onPress={() => navigation.navigate('')}>
-            <Icon name="more" size={35} color="#421908" />
+          <Right>
+          <Button transparent onPress={() => navigation.navigate('VideoCall')}>
+            <Icon name="videocam" size={25} color="#421908" />
           </Button>
+          <Button transparent onPress={() => navigation.navigate('')}>
+            <Icon name="more" size={30} color="#421908" />
+          </Button>
+          </Right>
         </Header>
       </TouchableOpacity>
       <View style={styles.parrent}>

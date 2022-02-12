@@ -100,27 +100,26 @@ const MyProfile = (props) => {
       <StatusBar translucent backgroundColor="transparent" />
       <View style={{height: '50%'}}>
         <Image style={styles.avatar} source={AvatarSource} />
-        <TouchableOpacity style={styles.back} onPress={()=>props.navigation.goBack()}>
-        <Icon
-          android="arrow-back"
-          size={35}
-          color="#421908"
-        />
+        <TouchableOpacity
+          style={styles.back}
+          onPress={() => props.navigation.goBack()}>
+          <Icon android="arrow-back" size={35} color="#421908" />
         </TouchableOpacity>
         <LinearGradient
-        colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
-        style={{
-          width: '100%',
-          height: '25%', 
-          position: 'absolute',
-          bottom: 0
-        }}/>
+          colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.3)']}
+          style={{
+            width: '100%',
+            height: '25%',
+            position: 'absolute',
+            bottom: 0,
+          }}
+        />
         <Icon style={styles.call} android="more" size={35} color="#421908" />
         <View style={{position: 'absolute', bottom: 10}}>
-        <Text style={styles.name}>
-          {myProfile.user_name ? myProfile.user_name : myProfile.telphone}
-        </Text>
-        <Text style={styles.status}>online</Text>
+          <Text style={styles.name}>
+            {myProfile.user_name ? myProfile.user_name : myProfile.telphone}
+          </Text>
+          <Text style={styles.status}>online</Text>
         </View>
       </View>
       <View style={styles.div}>
@@ -217,6 +216,6 @@ const styles = StyleSheet.create({
   },
   tag: {
     color: '#fff5e7',
-    fontSize: 14
+    fontSize: 14,
   },
 });

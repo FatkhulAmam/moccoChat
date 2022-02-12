@@ -6,32 +6,34 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class ListChat extends React.Component {
   render() {
     return (
-        <View style={styles.renderParent}>
-          <TouchableOpacity style={styles.borderAva} onPress={this.props.moveDetailContact}>
-            <Image style={styles.pict} source={this.props.avatar} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.press}
-            onPress={this.props.movePageChat}>
-            <Card transparent>
-              <View style={styles.headerChat}>
-                <Text style={styles.name}>{this.props.name}</Text>
-                <Right />
-                {/* <Icon name="check" /> */}
-                <Text style={styles.date} note>
-                  {this.props.time}
-                </Text>
-              </View>
-              <View style={styles.headerChat}>
-                <Text style={styles.status} note>
-                  {this.props.lastMessage}
-                </Text>
-                <Right />
-                {/* <Text style={styles.mount}>{this.props.mount}</Text> */}
-              </View>
-            </Card>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.renderParent}>
+        <TouchableOpacity
+          style={styles.borderAva}
+          onPress={this.props.moveDetailContact}>
+          <Image style={styles.pict} source={this.props.avatar} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.press}
+          onPress={this.props.movePageChat}>
+          <Card transparent>
+            <View style={styles.headerChat}>
+              <Text style={styles.name}>{this.props.name}</Text>
+              <Right />
+              {/* <Icon name="check" /> */}
+              <Text style={styles.date} note>
+                {this.props.time}
+              </Text>
+            </View>
+            <View style={styles.headerChat}>
+              <Text style={styles.status} note>
+                {this.props.lastMessage}
+              </Text>
+              <Right />
+              {/* <Text style={styles.mount}>{this.props.mount}</Text> */}
+            </View>
+          </Card>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
   },
   borderAva: {borderWidth: 1.5, borderColor: '#421908', borderRadius: 50},
   pict: {

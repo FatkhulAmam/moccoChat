@@ -4,7 +4,7 @@ import {Container, Button, Header, Title, Right} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {API_URL} from '@env';
 import moment from 'moment';
-import PushNotification, {Importance}from 'react-native-push-notification';
+import PushNotification, {Importance} from 'react-native-push-notification';
 import io from 'socket.io-client';
 import jwt_decode from 'jwt-decode';
 
@@ -14,7 +14,7 @@ import {getChatList} from '../redux/action/chat';
 import ListChat from '../components/ListChat';
 import avatar from '../assets/images/profile.png';
 import Firebase from '@react-native-firebase/app';
-import {addDeviceToken} from '../redux/action/profile';
+import {addDeviceToken, addSocketId} from '../redux/action/profile';
 
 const ChatList = (props) => {
   const navigation = useNavigation();
@@ -24,18 +24,19 @@ const ChatList = (props) => {
   const profileId = useSelector((state) => state.profile.data.id);
   const {dataList} = useSelector((state) => state.chat);
 
-  useEffect(async () => {
-    const device_token = await Firebase. messaging(). getToken()
-    await dispatch(addDeviceToken(token, device_token))
+  useEffect(() => {
+    const device_token = Firebase.messaging().getToken();
+    dispatch(addDeviceToken(token, device_token));
+    dispatch(addSocketId(token, props.route.params.socket.id));
     dispatch(getChatList(token));
     const socket = io(`${API_URL}`);
     socket.on(id, ({sender, message}) => {
       PushNotification.localNotification({
         id: sender,
-        channelId: "Mocco-Chat-App",
+        channelId: 'Mocco-Chat-App',
         message: message,
-        title: 'Mocco Chat'
-      })
+        title: 'Mocco Chat',
+      });
       dispatch(getChatList(token));
     });
     return () => {
@@ -74,7 +75,7 @@ const ChatList = (props) => {
       <Container style={styles.parrent}>
         <View
           style={{
-            borderBottomColor: "#42190875",
+            borderBottomColor: '#42190875',
             borderBottomWidth: 2.5,
           }}
         />

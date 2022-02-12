@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, Text, StatusBar, SafeAreaView} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
@@ -31,8 +31,7 @@ const slides = [
 const Intro = () => {
   const navigation = useNavigation();
   const renderItem = ({item, dimension}) => (
-    <SafeAreaView 
-    style={[styles.mainContent, dimension]}>
+    <SafeAreaView style={[styles.mainContent, dimension]}>
       <Icon
         style={{backgroundColor: 'transparent'}}
         name={item.icon}
@@ -43,22 +42,17 @@ const Intro = () => {
         <Text style={styles.text}>{item.text}</Text>
         <Text style={styles.title}>{item.title}</Text>
       </View>
-      </SafeAreaView>
+    </SafeAreaView>
   );
-
 
   const _renderDoneButton = () => {
     return (
       <View style={styles.buttonCircle}>
-        <Icon
-          name="md-checkmark"
-          color="rgba(255, 255, 255, .9)"
-          size={24}
-        />
+        <Icon name="md-checkmark" color="rgba(255, 255, 255, .9)" size={24} />
       </View>
     );
   };
-  
+
   const _renderNextButton = () => {
     return (
       <View style={styles.buttonCircle}>
@@ -82,14 +76,14 @@ const Intro = () => {
         renderDoneButton={_renderDoneButton}
         renderNextButton={_renderNextButton}
       />
-      </>
+    </>
   );
 };
 
 export default Intro;
 const styles = StyleSheet.create({
   mainContent: {
-    backgroundColor:'#dbc9a0',
+    backgroundColor: '#dbc9a0',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',

@@ -24,7 +24,9 @@ class Item extends React.Component {
           <Image style={styles.pict} source={this.props.avatar} />
           <View>
             <Text style={styles.name}>{this.props.name}</Text>
-            <Text style={styles.status} note>{this.props.phone}</Text>
+            <Text style={styles.status} note>
+              {this.props.phone}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     marginLeft: 25,
-    color: '#421908'
+    color: '#421908',
   },
   kontakTxt: {
     fontSize: 20,
@@ -138,6 +140,6 @@ const styles = StyleSheet.create({
   },
   status: {
     marginLeft: 10,
-    fontSize: 14
+    fontSize: 14,
   },
 });

@@ -53,7 +53,7 @@ const Landing = (props) => {
   return (
     <>
       <Header style={styles.header} transparent>
-      <StatusBar backgroundColor={'#dbc9a0'} />
+        <StatusBar backgroundColor={'#dbc9a0'} />
         <Button transparent onPress={() => props.navigation.goBack()}>
           <Icon name="arrow-back" size={30} color="#421908" />
         </Button>
