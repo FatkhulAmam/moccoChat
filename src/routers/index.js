@@ -3,9 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useSelector} from 'react-redux';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import NavigationBar from 'react-native-navbar-color'
+import NavigationBar from 'react-native-navbar-color';
 import Firebase from '@react-native-firebase/app';
-import PushNotification, {Importance} from "react-native-push-notification";
+import PushNotification, {Importance} from 'react-native-push-notification';
+import io from 'socket.io-client';
+import {API_URL} from '@env';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -24,17 +26,29 @@ import EditBio from '../screens/EditBio';
 import SetName from '../screens/SetName';
 import Search from '../screens/Search';
 import Contact from '../screens/Contact';
+import VideoCall from '../screens/VideoCall.js';
 
 import {DrawerContent} from '../components/DrawerStyles';
+
+const socket = io(API_URL);
 
 const DrawerNavigator = () => {
   const haveChat = useSelector((state) => state.chat.dataList.results);
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       {haveChat === [] ? (
-        <Drawer.Screen name="Home" component={LandingPage} options={{headerShown: false}}/>
+        <Drawer.Screen
+          name="Home"
+          component={LandingPage}
+          options={{headerShown: false}}
+        />
       ) : (
-        <Drawer.Screen name="Chat" component={ChatList} options={{headerShown: false}}/>
+        <Drawer.Screen
+          name="Chat"
+          component={VideoCall}
+          options={{headerShown: false}}
+          initialParams={{socket: socket}}
+        />
       )}
     </Drawer.Navigator>
   );
@@ -42,44 +56,44 @@ const DrawerNavigator = () => {
 
 const configurationOptions = {
   debug: true,
-  promptOnMissingPlayServices: true
-}
+  promptOnMissingPlayServices: true,
+};
 
 const Route = () => {
   useEffect(() => {
-    NavigationBar.setColor('#dbc9a0')
+    NavigationBar.setColor('#dbc9a0');
     PushNotification.createChannel(
       {
-        channelId: "Mocco-Chat-App",
-        channelName: "Mocco-Chat-Channel",
-        channelDescription: "A channel to categorise your notifications",
+        channelId: 'Mocco-Chat-App',
+        channelName: 'Mocco-Chat-Channel',
+        channelDescription: 'A channel to categorise your notifications',
         playSound: false,
-        soundName: "default",
+        soundName: 'default',
         importance: Importance.HIGH,
         vibrate: true,
       },
-      (created) => console.log(`createChannel returned '${created}'`)
+      (created) => console.log(`createChannel returned '${created}'`),
     );
-    Firebase.initializeApp(configurationOptions)
+    Firebase.initializeApp(configurationOptions);
     PushNotification.configure({
       onRegister: function (token) {
-        console.log("TOKEN:", token);
+        console.log('TOKEN:', token);
       },
       onNotification: function (notification) {
         PushNotification.localNotification({
-          channelId: "Mocco-Chat-App",
+          channelId: 'Mocco-Chat-App',
           message: notification.message,
-          title: notification.title
-        })
+          title: notification.title,
+        });
       },
-      onRegistrationError: function(err) {
+      onRegistrationError: function (err) {
         console.error(err.message, err);
       },
       popInitialNotification: true,
       requestPermissions: true,
-    })
-  },[]);
-  
+    });
+  }, []);
+
   const isRegister = useSelector((state) => state.auth.isRegistry);
   const haveName = useSelector((state) => state.profile.data.user_name);
 
@@ -169,6 +183,11 @@ const Route = () => {
           <Stack.Screen
             name="Contact"
             component={Contact}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="VideoCall"
+            component={VideoCall}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
